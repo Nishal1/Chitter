@@ -9,6 +9,7 @@ const flash = require('connect-flash');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const mongoSanitize = require('express-mongo-sanitize');
+const ExpressError = require('./utils/ExpressError');
 
 const dbUrl = 'mongodb://localhost:27017/chitter';
 
@@ -59,3 +60,23 @@ passport.use(new LocalStrategy(User.authenticate()));
 
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
+
+app.get('/', (req, res) => {
+    res.render('home');
+});
+
+app.all('*', (req, res, next) => {
+    next(new ExpressError('PAGE NOT FOUND', 404));
+});
+
+app.use((err, req, res, next) => {
+    const { statusCode = 500 } = err;
+    if(!err.message) err.message = "Oh no, Something went wrong!";
+    
+    res.status(statusCode).render('error', { err });
+});
+
+const port = 3000;
+app.listen(port, () => {
+    console.log(`LISTENING TO PORT ${port}`);
+});
