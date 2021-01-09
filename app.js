@@ -10,6 +10,8 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const mongoSanitize = require('express-mongo-sanitize');
 const ExpressError = require('./utils/ExpressError');
+const MongoDBStore = require('connect-mongo')(session);
+const User = require('./models/user');
 
 const dbUrl = 'mongodb://localhost:27017/chitter';
 
@@ -37,6 +39,17 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(mongoSanitize());
 
 const secret = 'thishsouldbeanactualsecret';
+
+const store = new MongoDBStore({
+    url: dbUrl,
+    secret,
+    touchAfter: 24 * 60 * 60
+});
+
+store.on('error', function (e) {
+    console.log('SESSION STORE ERROR', e);
+})
+
 
 const sessionConfig = {
     store,
