@@ -1,0 +1,19 @@
+{
+  "name": "chitter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nishal1/Chitter.git"
+  },
+  "author": "Nishal",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Nishal1/Chitter/issues"
+  },
+  "homepage": "https://github.com/Nishal1/Chitter#readme"
+}
