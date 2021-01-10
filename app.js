@@ -12,6 +12,8 @@ const mongoSanitize = require('express-mongo-sanitize');
 const ExpressError = require('./utils/ExpressError');
 const MongoDBStore = require('connect-mongo')(session);
 const User = require('./models/user');
+const userRoutes = require('./routes/user');
+const postRoutes = require('./routes/post');
 
 const dbUrl = 'mongodb://localhost:27017/chitter';
 
@@ -74,9 +76,19 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+app.use((req, res, next) => {
+    res.locals.success = req.flash('success');  
+    res.locals.error = req.flash('error');
+    res.locals.currentUser = req.user;
+    next();
+});
+
 app.get('/', (req, res) => {
     res.render('home');
 });
+
+app.use('/posts', postRoutes);
+app.use('/', userRoutes);
 
 app.all('*', (req, res, next) => {
     next(new ExpressError('PAGE NOT FOUND', 404));

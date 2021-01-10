@@ -1,5 +1,5 @@
 body {
-    background-image: url('https://images.unsplash.com/photo-1508163223045-1880bc36e222?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2851&q=80');
+    background-image: linear-gradient(to right, #74CAFE, #31A1F2, #15202B);
     background-size: cover;
 }
 
