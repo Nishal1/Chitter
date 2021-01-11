@@ -1,0 +1,23 @@
+body {
+    color: black;
+    padding-top: 70px;
+    font-family: -apple-system, system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+nav {
+    background-color: rgb(38, 87, 136);
+    opacity: 0.90;
+    font-family: -apple-system, system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: large;
+}
+
+.navAnchor {
+    color: white !important;
+}
+.navAnchor:hover {
+    background-color: #27408B;
+}
+
+.navbar-brand {
+    font-size: x-large;
+}
