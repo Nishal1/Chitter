@@ -6,7 +6,7 @@ const Post = require('../models/post');
 const { isLoggedin } = require('../middleware');
 
 router.route('/')
-    .get(isLoggedin, posts.index);
+    .get(isLoggedin, catchAsync(posts.index));
 
 
 module.exports = router;
