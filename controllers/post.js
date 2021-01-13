@@ -19,7 +19,12 @@ module.exports.createPost = async (req, res) => {
 
 module.exports.showPosts = async (req, res) => {
     const { id } = req.params;
-    const post = await Post.findById(id).populate('author');
+    const post = await Post.findById(id).populate({
+        path: 'comments',
+        populate: {
+            path: 'author'
+        }
+    }).populate('author');
 
     if(!post) {
         req.flash('error', 'Sorry, could not find matching post');

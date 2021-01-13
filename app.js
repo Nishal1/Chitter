@@ -14,7 +14,8 @@ const ExpressError = require('./utils/ExpressError');
 const User = require('./models/user');
 const userRoutes = require('./routes/user');
 const postRoutes = require('./routes/post');
-
+const commentRoutes = require('./routes/comment');
+ 
 const dbUrl = 'mongodb://localhost:27017/chitter';
 
 mongoose.connect(dbUrl, {
@@ -88,6 +89,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/posts', postRoutes);
+app.use('/posts/:id/comments', commentRoutes);
 app.use('/', userRoutes);
 
 app.all('*', (req, res, next) => {
