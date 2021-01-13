@@ -1,8 +1,9 @@
 const Post = require('../models/post');
+const formatDate = require('../helper');
 
 module.exports.index = async (req, res) => {
     const posts = await Post.find().populate('author');
-    res.render('posts/index', { posts });
+    res.render('posts/index', { posts, formatDate });
 }
 
 module.exports.renderNewForm =  (req, res) => {
