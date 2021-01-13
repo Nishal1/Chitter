@@ -1,15 +1,14 @@
 <% layout('layouts/boilerplate') %>
 <h1>index</h1>
 <h3>Hello, <%= currentUser.FirstName %> <%= currentUser.LastName %> </h3>
-<a href="/logout">Logout</a>
-
+<!-- d-flex justify-content-center -->
 <% for(let post of posts) { %> 
-    <div class="container">
+    <div class="d-flex justify-content-center">
       <div class="col-sm-12 col-md-8 col-lg-6">
         <div class="card">
           <div class="card-body">
-            <h5 class="card-title">Title or date</h5>
-            <h6 class="card-subtitle mb-2 text-muted">@<%= post.author.username %> </h6>
+            <h5 class="card-title"><%= post.author.FirstName %> <%= post.author.LastName %></h5>
+            <h6 class="card-subtitle mb-2 text-muted">@<%= post.author.username %> : <%= post.createdAt.getDate()%>/ <%= post.createdAt.getMonth()+1 %>/ <%= post.createdAt.getFullYear()%></h6>
             <p class="card-text"><%= post.body %> </p>
             <a href="/posts/<%= post._id %>" class="card-link">View</a>
             <a href="#" class="card-link">Comment</a>

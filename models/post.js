@@ -12,6 +12,8 @@ const PostSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Comment'
     }]
+}, {
+    timestamps: true
 });
 
 PostSchema.post('findOneAndDelete', async function(doc) {

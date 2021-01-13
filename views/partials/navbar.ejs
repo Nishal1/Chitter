@@ -7,7 +7,10 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-link" aria-current="page" href="/posts">Profile</a>
+                <a class="nav-link" aria-current="page" href="/posts">Posts</a>
+                <% if(currentUser) { %> 
+                    <a class="nav-link" aria-current="page" href="/profile/<%= currentUser._id %>">Profile</a>
+                <% } %>
                 <a class="nav-link" href="/posts/new">Make a post</a>
                 <a class="nav-link" href="/">About us</a>
                

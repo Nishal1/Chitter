@@ -21,3 +21,9 @@ nav {
 .navbar-brand {
     font-size: x-large;
 }
+
+.card-body {
+    border: #2B91DA solid 2px;
+    border-radius: 10px;
+    margin-bottom: 3px;
+}

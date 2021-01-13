@@ -22,7 +22,7 @@ const seedDB = async () => {
     for(let i = 0; i < 50; i++){
         const post = new Post({
             body: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo',
-            author: '5ffd4fe0010f6d5a69d06063'
+            author: '5ffee7696b15ed75e5f8f776'
         });
         await post.save();
     }
