@@ -3,7 +3,7 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-12 col-md-8 col-lg-6">
-      <div class="card">
+      <div class="card noth">
         <div class="card-body">
           <h5 class="card-title"><a href="/profile/<%= post.author._id%>"><%= post.author.FirstName %> <%= post.author.LastName %></a></h5>
           <h6 class="card-subtitle mb-2 text-muted">@<%= post.author.username %> &#183
@@ -22,7 +22,7 @@
       </div>
 
       <% for(comment of post.comments) { %>
-      <div class="card">
+      <div class="card noth">
         <div class="card-body">
           <h6 class="card-title"><a href="/profile/<%= comment.author._id%>"><%= comment.author.FirstName %> <%= comment.author.LastName %></a> <span
               class="card-subtitle mb-2 text-muted">@<%= comment.author.username %> &#183

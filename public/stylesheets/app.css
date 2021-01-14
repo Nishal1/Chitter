@@ -1,5 +1,6 @@
 body {
-    color: black;
+    background-color: #15202B;
+    color: white;
     padding-top: 70px;
     font-family: -apple-system, system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
@@ -11,6 +12,10 @@ nav {
     font-size: large;
 }
 
+.nav-link {
+    color: white;
+}
+
 .navbar-brand {
     font-size: x-large;
 }
@@ -19,8 +24,31 @@ nav {
    border-bottom: solid white 2px;
 }
 
-.card-body {
+.card {
     border: #2B91DA solid 2px;
+    background-color: #15202B;
     border-radius: 10px;
-    margin-bottom: 3px;
+    margin-bottom: 5px;
+}
+
+.highlight {
+    background-color: #1C2732;
+}
+
+.noth {
+    color: white;
+}
+
+.btn-success {
+    background-color: #1D89CC;
+    border-radius: 50px;
+    width: 150px;
+    color: white;
+    font-weight: 600;
+    font-size: medium;
+    border-radius: 25px;
+}
+
+.card-subtitle, .text-muted {
+    color: #ced7de !important;
 }

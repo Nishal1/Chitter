@@ -7,7 +7,7 @@
 <% for(let p of result[0].posts) { %>
     <div class="d-flex justify-content-center">
         <div class="col-sm-12 col-md-8 col-lg-6">
-          <div class="card">
+          <div class="card noth">
             <div class="card-body">
               <h5 class="card-title"><%= user.FirstName %> <%= user.LastName %></h5>
               <h6 class="card-subtitle mb-2 text-muted">@<%= user.username %>  &#183 <%= formatDate(p.createdAt, true) %> </h6>
