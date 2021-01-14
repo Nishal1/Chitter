@@ -5,7 +5,7 @@
     <div class="col-sm-12 col-md-8 col-lg-6">
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title"><%= post.author.FirstName %> <%= post.author.LastName %> </h5>
+          <h5 class="card-title"><a href="/profile/<%= post.author._id%>"><%= post.author.FirstName %> <%= post.author.LastName %></a></h5>
           <h6 class="card-subtitle mb-2 text-muted">@<%= post.author.username %> &#183
             <%= formatDate(post.createdAt, true) %></h6>
           <p class="card-text"><%= post.body %> </p>
@@ -24,7 +24,7 @@
       <% for(comment of post.comments) { %>
       <div class="card">
         <div class="card-body">
-          <h6 class="card-title"><%= comment.author.FirstName %> <%= comment.author.LastName %> <span
+          <h6 class="card-title"><a href="/profile/<%= comment.author._id%>"><%= comment.author.FirstName %> <%= comment.author.LastName %></a> <span
               class="card-subtitle mb-2 text-muted">@<%= comment.author.username %> &#183
               <%= formatDate(comment.createdAt, true) %></span></h6>
           <h6 class="card-subtitle mb-2 text-muted">reply to @<%= post.author.username %> </h6>

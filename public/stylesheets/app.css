@@ -11,15 +11,12 @@ nav {
     font-size: large;
 }
 
-.navAnchor {
-    color: white !important;
-}
-.navAnchor:hover {
-    background-color: #27408B;
-}
-
 .navbar-brand {
     font-size: x-large;
+}
+
+.underline {
+   border-bottom: solid white 2px;
 }
 
 .card-body {

@@ -8,7 +8,8 @@ const formatDate = require('../helper');
 module.exports.renderProfile = async (req, res) => {
 
     try {
-        const authorId = req.user._id;
+        const authorId = req.params.id;
+        const user = await User.findById(authorId);
         const result = await User.aggregate([
             {
                 $match: {
@@ -27,7 +28,7 @@ module.exports.renderProfile = async (req, res) => {
 
         const date = formatDate(req.user.createdAt, false);
         if (result.length > 0) {
-            return res.render('profile', { result, date, formatDate });
+            return res.render('profile', { result, date, user, formatDate });
         } else {
             res.status(404).send("User not found");
         }
