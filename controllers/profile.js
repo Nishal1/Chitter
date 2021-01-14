@@ -26,9 +26,8 @@ module.exports.renderProfile = async (req, res) => {
         ]);
 
         const date = formatDate(req.user.createdAt, false);
-        
         if (result.length > 0) {
-            return res.render('profile', { result, date });
+            return res.render('profile', { result, date, formatDate });
         } else {
             res.status(404).send("User not found");
         }

@@ -10,7 +10,7 @@
           <div class="card">
             <div class="card-body">
               <h5 class="card-title"><%= currentUser.FirstName %> <%= currentUser.LastName %></h5>
-              <h6 class="card-subtitle mb-2 text-muted">@<%= currentUser.username %> </h6>
+              <h6 class="card-subtitle mb-2 text-muted">@<%= currentUser.username %>  &#183 <%= formatDate(p.createdAt, true) %> </h6>
               <p class="card-text"><%= p.body %> </p>
               <a href="/posts/<%= p._id %>" class="card-link">View</a>
               <a href="#" class="card-link">Comment</a>

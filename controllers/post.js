@@ -32,7 +32,7 @@ module.exports.showPosts = async (req, res) => {
         return res.redirect('/posts');
     }
 
-    res.render('posts/show', { post });
+    res.render('posts/show', { post, formatDate });
 }
 
 module.exports.renderEditForm = async(req, res) => {

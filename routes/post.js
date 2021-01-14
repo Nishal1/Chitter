@@ -3,7 +3,7 @@ const router = express.Router();
 const catchAsync = require('../utils/catchAsync');
 const posts = require('../controllers/post');
 const Post = require('../models/post');
-const { isLoggedin } = require('../middleware');
+const { isLoggedin, isAuthor } = require('../middleware');
 
 router.route('/')
     .get(isLoggedin, catchAsync(posts.index))
@@ -13,8 +13,8 @@ router.get('/new', isLoggedin, posts.renderNewForm);
 
 router.route('/:id')
     .get(isLoggedin, catchAsync(posts.showPosts))
-    .put(isLoggedin, catchAsync(posts.updatePost))
-    .delete(isLoggedin, catchAsync(posts.deletePost));
+    .put(isLoggedin, isAuthor, catchAsync(posts.updatePost))
+    .delete(isLoggedin, isAuthor, catchAsync(posts.deletePost));
 
 router.get('/:id/edit', isLoggedin, catchAsync(posts.renderEditForm));
 
