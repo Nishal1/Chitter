@@ -37,3 +37,30 @@ module.exports.renderProfile = async (req, res) => {
         res.status(500).send("Something went wrong");
     }
 }
+
+module.exports.follow = async (req, res) => {
+    try {
+        const { id } = req.params; //id of to follow
+        const currUserId = req.user._id;
+        console.log(id, "  ", currUserId);
+        const userToFollow = await User.findById(id);
+        const currUser = await User.findById(currUserId);
+
+        if(!userToFollow || !currUser) {
+            req.flash('error', 'Something went wrong');
+            return res.redirect(`/profile/${id}`);
+        }
+
+        userToFollow.follower.push(currUserId);
+        currUser.following.push(id);
+
+        await userToFollow.save();
+        await currUser.save();
+
+        req.flash('success', 'Followed')
+        res.redirect(`/profile/${id}`);
+
+    } catch (err) {
+        res.status(500).send("Something went wrong");
+    }
+}

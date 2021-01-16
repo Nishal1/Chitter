@@ -1,21 +1,33 @@
 <% layout('layouts/boilerplate') %>
 
-<h1><%= user.FirstName %> <%= user.LastName %> </h1>
-<h6 class="text-muted">@<%= user.username %></h6>
-<h6>Joined: <%= date %> </h6>
-<h6>Posts: <%= result[0].posts.length %> </h6>
+<div class="container-fluid">
+  <h1><%= user.FirstName %> <%= user.LastName %> </h1>
+  <h6 class="text-muted">@<%= user.username %></h6>
+  <h6>Joined: <%= date %> </h6>
+  <h6>Posts: <%= result[0].posts.length %> </h6>
+  <h6>Followers: <%= user.follower.length %> </h6>
+  <h6>Folowing: <%= user.following.length %> </h6>
+  
+  <form action="/profile/<%= user._id%>/follow" method="POST"> 
+    <button class="btn btn-success btn-block">Follow</button>
+  </form>
+
+
+  <h6>Your Posts:</h6>
+</div>
+
 <% for(let p of result[0].posts) { %>
-    <div class="d-flex justify-content-center">
-        <div class="col-sm-12 col-md-8 col-lg-6">
-          <div class="card noth">
-            <div class="card-body">
-              <h5 class="card-title"><%= user.FirstName %> <%= user.LastName %></h5>
-              <h6 class="card-subtitle mb-2 text-muted">@<%= user.username %>  &#183 <%= formatDate(p.createdAt, true) %> </h6>
-              <p class="card-text"><%= p.body %> </p>
-              <a href="/posts/<%= p._id %>" class="card-link">View</a>
-              <a href="#" class="card-link">Comment</a>
-            </div>
-          </div>
-        </div>
+<div class="d-flex justify-content-center">
+  <div class="col-sm-12 col-md-8 col-lg-6">
+    <div class="card noth">
+      <div class="card-body">
+        <h5 class="card-title"><%= user.FirstName %> <%= user.LastName %></h5>
+        <h6 class="card-subtitle mb-2 text-muted">@<%= user.username %> &#183 <%= formatDate(p.createdAt, true) %> </h6>
+        <p class="card-text"><%= p.body %> </p>
+        <a href="/posts/<%= p._id %>" class="card-link">View</a>
+        <a href="#" class="card-link">Comment</a>
+      </div>
     </div>
+  </div>
+</div>
 <% } %>

@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
 const passportLocalMongoose = require('passport-local-mongoose');
+const { Schema } = mongoose;
 
-const UserSchema = new mongoose.Schema({
+const UserSchema = new Schema({
     FirstName: {
         type: String,
         required: true
@@ -15,7 +16,15 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true,
         unique: true
-    }
+    } ,
+    following: [{
+            type: Schema.Types.ObjectId,
+            ref: 'User'
+     }] ,
+    follower: [{
+            type: Schema.Types.ObjectId,
+            ref: 'User'
+     }] 
 }, {
     timestamps: true
 });

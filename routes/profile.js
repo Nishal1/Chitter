@@ -9,5 +9,8 @@ const ObjectId = require("mongoose").Types.ObjectId;
 router.route('/')
     .get(isLoggedin, catchAsync(profile.renderProfile));
 
+router.route('/follow')
+    .post(isLoggedin, catchAsync(profile.follow));
+
 
 module.exports = router;

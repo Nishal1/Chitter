@@ -8,12 +8,9 @@ body {
 nav {
     background-color: rgb(38, 87, 136);
     opacity: 0.90;
+    color: white;
     font-family: -apple-system, system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     font-size: large;
-}
-
-.nav-link {
-    color: white;
 }
 
 .navbar-brand {
