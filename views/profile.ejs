@@ -1,19 +1,44 @@
 <% layout('layouts/boilerplate') %>
 
 <div class="container-fluid">
-  <h1><%= user.FirstName %> <%= user.LastName %> </h1>
-  <h6 class="text-muted">@<%= user.username %></h6>
-  <h6>Joined: <%= date %> </h6>
-  <h6>Posts: <%= result[0].posts.length %> </h6>
-  <h6>Followers: <%= user.follower.length %> </h6>
-  <h6>Folowing: <%= user.following.length %> </h6>
-  
-  <form action="/profile/<%= user._id%>/follow" method="POST"> 
-    <button class="btn btn-success btn-block">Follow</button>
-  </form>
+  <div class="card">
+    <h5 class="card-header"><%= user.FirstName %> <%= user.LastName %> </h5>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-6">
+          <h5 class="card-title">@<%= user.username %> &#183 Joined: <%= date %></h5>
+          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+          
+        </div>
+        <div id="outer" class="col-6">
+          <h5 class="card-title"><%= result[0].posts.length %> </h5>
+          <h5 class="card-title">Posts </h5>
+          <form class="inner" action="/profile/<%= user._id%>/followers" method="POST">
+            <button id="followers" class="btn btn-success btn-block"> <%= user.follower.length %> Followers</button>
+          </form>
+          <form class="inner" action="/profile/<%= user._id%>/following" method="POST">
+            <button id="following" class="btn btn-success btn-block"><%= user.following.length %> Following</button>
+          </form>
+          <% if(currentUser && !currentUser.equals(user._id) && !displayFollow) { %>
+            <form class="inner" action="/profile/<%= user._id%>/follow" method="POST">
+              <button class="btn btn-success btn-block">Follow</button>
+            </form>
+          <% } %> 
+          
+          <% if(displayFollow) { %>
+            <form class="inner" action="/profile/<%= user._id%>/unfollow" method="POST">
+              <button class="btn btn-success btn-block">&#10003; Following</button>
+            </form>
+          <% } %>  
+          
+        </div>
+      </div>
+    </div>
+  </div>
 
 
-  <h6>Your Posts:</h6>
+
+  <h3>Your Posts:</h3>
 </div>
 
 <% for(let p of result[0].posts) { %>

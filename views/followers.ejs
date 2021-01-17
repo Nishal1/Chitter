@@ -1,0 +1,23 @@
+<% layout('layouts/boilerplate') %>
+
+<% if(!users.follower.length) {%> 
+  <div class="d-flex justify-content-center">
+    <div class="col-sm-12 col-md-8 col-lg-6"> 
+        <div class="card-body">
+          <h5 class="card-title">No followers</h5>
+        </div>
+    </div>
+  </div>
+<% } %> 
+
+<% for(let follower of users.follower) { %>
+    <div class="d-flex justify-content-center">
+      <div class="col-sm-12 col-md-8 col-lg-6">
+        <div onclick="location.href='/profile/<%= follower._id %>'" class="card noth">
+          <div class="card-body">
+            <h5 class="card-title"><%= follower.FirstName %> <%= follower.LastName %></h5>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% } %>

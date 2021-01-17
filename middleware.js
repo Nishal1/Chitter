@@ -1,7 +1,7 @@
 const ExpressError = require('./utils/ExpressError');
 const Post = require('./models/post');
 const Comment = require('./models/comment');
-
+const User = require('./models/user');
 
 module.exports.isLoggedin = (req, res, next) => {
     //console.log(req.user);
@@ -21,4 +21,42 @@ module.exports.isAuthor = async (req, res, next) => {
         return res.redirect(`/posts/${ id }`);
     }
     next();
+}
+
+module.exports.isNotAuthor = async (req, res, next) => {
+    const { id } = req.params; 
+    const signedInUser = await User.findById(req.user._id);
+    if(signedInUser.equals(id)) {
+        req.flash('error', 'Sorry, you do not have permission to do that');
+        return res.redirect(`/profile/${id}`);
+    }
+    next();
+}
+
+module.exports.isFollowing = async (req, res, next) => {
+    const { id } = req.params;
+    const signedInUser = await User.findById(req.user._id);
+    for(let obj of signedInUser.following) {
+        if(obj.equals(id)) {
+            req.flash('error', 'aldready following this user');
+            return res.redirect(`/profile/${id}`);
+        }
+    }
+    next();
+}
+
+module.exports.isFollowingAlready = async (req, res, next) => {
+    const { id } = req.params;
+    const signedInUser = await User.findById(req.user._id);
+    let flag = false;
+    for(let obj of signedInUser.following) {
+        if(obj.equals(id)) {
+            flag = true;
+        }
+    }
+    if(flag) {
+        return next();
+    }
+    req.flash('error', 'Need to follow inorder to unfollow');
+    res.redirect(`/profile/${id}`);
 }

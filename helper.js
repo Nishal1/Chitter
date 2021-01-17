@@ -1,4 +1,4 @@
-const formatDate = (x, reqDate) => {
+module.exports.formatDate = (x, reqDate) => {
     const year = x.getFullYear();
     const month = x.getMonth();
     const dt = x.getDate();
@@ -15,4 +15,11 @@ const formatDate = (x, reqDate) => {
     return date;
   }
   
-module.exports = formatDate;
+module.exports.isFollowing = (signedInUser, id) => {
+    for(let obj of signedInUser.following) {
+        if(obj.equals(id)) {
+            return true;
+        }
+    }
+    return false;
+}

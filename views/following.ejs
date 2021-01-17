@@ -1,0 +1,23 @@
+<% layout('layouts/boilerplate') %>
+
+<% if(!users.following.length) {%> 
+    <div class="d-flex justify-content-center">
+      <div class="col-sm-12 col-md-8 col-lg-6"> 
+          <div class="card-body">
+            <h5 class="card-title">No following</h5>
+          </div>
+      </div>
+    </div>
+  <% } %> 
+
+<% for(let following of users.following) { %>
+    <div class="d-flex justify-content-center">
+      <div class="col-sm-12 col-md-8 col-lg-6">
+        <div onclick="location.href='/profile/<%= following._id %>'" class="card noth">
+          <div class="card-body">
+            <h5 class="card-title"><%= following.FirstName %> <%= following.LastName %></h5>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% } %>

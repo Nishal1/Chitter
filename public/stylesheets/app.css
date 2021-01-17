@@ -49,3 +49,34 @@ nav {
 .card-subtitle, .text-muted {
     color: #ced7de !important;
 }
+
+#outer {
+    width: 100%;
+    text-align: center;
+}
+
+.inner {
+    margin-right: 3px;
+    display: inline-block;
+    align-items: center;
+}
+
+#followers {
+    background-color: #1C2732;
+    border: 1px white solid;
+}
+
+#followers:hover {
+    background-color: gray;
+    border: 1px white solid;
+}
+
+#following {
+    background-color: #1C2732;
+    border: 1px white solid;
+}
+
+#following:hover {
+    background-color: gray;
+    border: 1px white solid;
+}
