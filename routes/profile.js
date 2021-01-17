@@ -14,8 +14,8 @@ router.route('/follow')
 
 router.post('/unfollow', isLoggedin, isFollowingAlready, catchAsync(profile.unfollow));
 
-router.post('/followers', isLoggedin, catchAsync(profile.renderFollowers));
-router.post('/following', isLoggedin, catchAsync(profile.renderFollowing));
+router.get('/followers', isLoggedin, catchAsync(profile.renderFollowers));
+router.get('/following', isLoggedin, catchAsync(profile.renderFollowing));
 
 
 module.exports = router;

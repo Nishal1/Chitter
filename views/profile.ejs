@@ -8,29 +8,53 @@
         <div class="col-6">
           <h5 class="card-title">@<%= user.username %> &#183 Joined: <%= date %></h5>
           <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-          
+
         </div>
         <div id="outer" class="col-6">
           <h5 class="card-title"><%= result[0].posts.length %> </h5>
           <h5 class="card-title">Posts </h5>
-          <form class="inner" action="/profile/<%= user._id%>/followers" method="POST">
+          <form class="inner" action="/profile/<%= user._id%>/followers" method="GET">
             <button id="followers" class="btn btn-success btn-block"> <%= user.follower.length %> Followers</button>
           </form>
-          <form class="inner" action="/profile/<%= user._id%>/following" method="POST">
+          <form class="inner" action="/profile/<%= user._id%>/following" method="GET">
             <button id="following" class="btn btn-success btn-block"><%= user.following.length %> Following</button>
           </form>
           <% if(currentUser && !currentUser.equals(user._id) && !displayFollow) { %>
-            <form class="inner" action="/profile/<%= user._id%>/follow" method="POST">
-              <button class="btn btn-success btn-block">Follow</button>
-            </form>
-          <% } %> 
-          
+          <form class="inner" action="/profile/<%= user._id%>/follow" method="POST">
+            <button class="btn btn-success btn-block">Follow</button>
+          </form>
+          <% } %>
+
           <% if(displayFollow) { %>
-            <form class="inner" action="/profile/<%= user._id%>/unfollow" method="POST">
-              <button class="btn btn-success btn-block">&#10003; Following</button>
-            </form>
-          <% } %>  
-          
+          <!-- <form class="inner" action="/profile/<%= user._id%>/unfollow" method="POST">
+            <button id="unfollow" class="btn btn-success btn-block">&#10003; Following</button>
+          </form> -->
+
+          <!-- Button trigger modal -->
+          <button id="unfollow" class="inner btn btn-success btn-block" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Modal">
+            &#10003; Following
+          </button>
+
+          <!-- Modal -->
+          <div class="modal fade" id="Modal" tabindex="-1" aria-labelledby="ModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="ModalLabel">Are you sure to unfollow?</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-footer">
+                  <button class="inner btn btn-success btn-block" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <form class="inner" action="/profile/<%= user._id%>/unfollow" method="POST">
+                    <button id="unfollow" class="btn btn-success btn-block">Yes</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+          <% } %>
+
         </div>
       </div>
     </div>
