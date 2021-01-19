@@ -94,3 +94,11 @@ nav {
 .modal {
     color: black !important; 
 }
+
+#profile-top {
+    margin-top: 60px;
+}
+
+.modal-body {
+    color: black;
+}

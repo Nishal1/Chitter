@@ -5,34 +5,49 @@
 <div class="d-flex justify-content-center">
   <div class="col-sm-12 col-md-8 col-lg-6">
     <div class="card shadow p-3">
-            <form action="/posts" method="POST" class="validated-form" novalidate>
-                <div class="mb-3">
-                    <textarea class="form-control" type="text" id="body" name="post[body]" placeholder="What's happening?" required></textarea>
-                    <div class="valid-feedback">
-                        Looks good!
-                    </div>
-                </div>
-               
-                <button class="btn btn-success btn-block">Post!</button>
-            </form>
-
+      <form action="/posts" method="POST" class="validated-form" novalidate>
+        <div class="mb-3">
+          <textarea class="form-control" type="text" id="body" name="post[body]" placeholder="What's happening?"
+            required></textarea>
+          <div class="valid-feedback">
+            Looks good!
+          </div>
         </div>
+
+        <button class="btn btn-success btn-block">Post!</button>
+      </form>
+
     </div>
+  </div>
 </div>
 </div>
-   
+
 
 
 <% for(let post of posts) { %>
 <div class="d-flex justify-content-center">
   <div class="col-sm-12 col-md-8 col-lg-6">
-    <div onclick="location.href='/posts/<%= post._id %>'" class="card noth">
+    <div class="card noth">
       <div class="card-body">
-        <h5 class="card-title"><a href="/profile/<%= post.author._id%>"><%= post.author.FirstName %> <%= post.author.LastName %></a></h5>
-        <h6 class="card-subtitle mb-2 text-muted">@<%= post.author.username %> &#183 <%= formatDate(post.createdAt, true) %> </h6>
+        <h5 class="card-title"><a href="/profile/<%= post.author._id%>"><%= post.author.FirstName %>
+            <%= post.author.LastName %></a></h5>
+        <h6 class="card-subtitle mb-2 text-muted">@<%= post.author.username %> &#183
+          <%= formatDate(post.createdAt, true) %> </h6>
         <p class="card-text"><%= post.body %> </p>
         <a href="/posts/<%= post._id %>" class="card-link">View</a>
-        <a href="#" class="card-link">Comment</a>
+        <div class="ui labeled button" tabindex="0">
+          <form action="/posts/<%= post._id %>/like" method="POST">
+            <button class="ui button">
+              <i class="heart icon"></i> Like
+            </button>
+          </form> 
+
+          <a href="/posts/<%= post._id %>/likes" class="ui basic label">
+            <%= post.likes.length %> 
+          </a>
+        </div>
+          
+
       </div>
     </div>
   </div>

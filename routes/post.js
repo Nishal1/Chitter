@@ -18,4 +18,8 @@ router.route('/:id')
 
 router.get('/:id/edit', isLoggedin, catchAsync(posts.renderEditForm));
 
+router.post('/:id/like', isLoggedin, catchAsync(posts.likePost));
+
+router.get('/:id/likes', isLoggedin, catchAsync(posts.showLikes));
+
 module.exports = router;

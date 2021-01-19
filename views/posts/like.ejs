@@ -1,0 +1,23 @@
+<% layout('layouts/boilerplate') %>
+
+<% if(!post.likes.length) {%>
+<div class="d-flex justify-content-center">
+    <div class="col-sm-12 col-md-8 col-lg-6">
+        <div class="card-body">
+            <h5 class="card-title">No likes</h5>
+        </div>
+    </div>
+</div>
+<% } %>
+
+<% for(let user of post.likes) { %>
+<div class="d-flex justify-content-center">
+    <div class="col-sm-12 col-md-8 col-lg-6">
+        <div onclick="location.href='/profile/<%= user._id %>'" class="card noth">
+            <div class="card-body">
+                <h5 class="card-title"><%= user.FirstName %> <%= user.LastName %></h5>
+            </div>
+        </div>
+    </div>
+</div>
+<% } %>
