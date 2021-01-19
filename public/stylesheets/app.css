@@ -28,6 +28,10 @@ nav {
     margin-bottom: 5px;
 }
 
+.width-changer {
+    min-width: 500px
+}
+
 .highlight {
     background-color: #1C2732;
 }
@@ -101,4 +105,20 @@ nav {
 
 .modal-body {
     color: black;
+}
+
+.likes {
+    border: 1px solid grey;
+    margin-bottom: 0px;
+    border-radius: 0%;
+}
+
+.go-right {
+    float: right;
+}
+
+.likes-display {
+    display: inline-block; 
+    margin-right: 60px;
+    text-align: center;
 }

@@ -4,7 +4,7 @@
 
 <div class="d-flex justify-content-center">
   <div class="col-sm-12 col-md-8 col-lg-6">
-    <div class="card shadow p-3">
+    <div class="width-changer card shadow p-3">
       <form action="/posts" method="POST" class="validated-form" novalidate>
         <div class="mb-3">
           <textarea class="form-control" type="text" id="body" name="post[body]" placeholder="What's happening?"
@@ -27,7 +27,7 @@
 <% for(let post of posts) { %>
 <div class="d-flex justify-content-center">
   <div class="col-sm-12 col-md-8 col-lg-6">
-    <div class="card noth">
+    <div class="width-changer card noth">
       <div class="card-body">
         <h5 class="card-title"><a href="/profile/<%= post.author._id%>"><%= post.author.FirstName %>
             <%= post.author.LastName %></a></h5>

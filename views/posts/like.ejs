@@ -8,14 +8,36 @@
         </div>
     </div>
 </div>
-<% } %>
+<% } else { %>
+    <div class="d-flex justify-content-center">
+        <h4>Likes</h4>
+    </div>
+<% } %> 
 
 <% for(let user of post.likes) { %>
 <div class="d-flex justify-content-center">
     <div class="col-sm-12 col-md-8 col-lg-6">
-        <div onclick="location.href='/profile/<%= user._id %>'" class="card noth">
+        <div onclick="location.href='/profile/<%= user._id %>'" class="width-changer likes card noth">
             <div class="card-body">
-                <h5 class="card-title"><%= user.FirstName %> <%= user.LastName %></h5>
+    
+                    <div class="likes-display">
+                        <h5 class="card-title"><%= user.FirstName %> <%= user.LastName %></h5>
+                    </div>
+                    <div class="go-right">
+                        <% if(currentUser && !currentUser.equals(user._id) && !isFollowing(currentUser, user._id)) { %>
+                            <form class="inner" action="/profile/<%= user._id%>/follow" method="POST">
+                                <button class="btn btn-success btn-block">Follow</button>
+                            </form>
+                            <% } %>
+                            <% if(isFollowing(currentUser, user._id)) { %>
+                            <form class="inner" action="/profile/<%= user._id%>/unfollow" method="POST">
+                                <button id="unfollow" class="inner btn btn-success btn-block" class="btn btn-primary">
+                                    &#10003; Following
+                                </button>
+                            </form>
+                            <% } %>
+                    </div>
+
             </div>
         </div>
     </div>

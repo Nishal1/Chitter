@@ -24,16 +24,11 @@
           </form>
           <% } %>
           <% if(displayFollow) { %>
-          <!-- <form class="inner" action="/profile/<%= user._id%>/unfollow" method="POST">
-            <button id="unfollow" class="btn btn-success btn-block">&#10003; Following</button>
-          </form> -->
-
-          <!-- Button trigger modal -->
+    
           <button id="unfollow" class="inner btn btn-success btn-block" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Modal">
             &#10003; Following
           </button>
 
-          <!-- Modal -->
           <div class="modal fade" id="Modal" tabindex="-1" aria-labelledby="ModalLabel"
             aria-hidden="true">
             <div class="modal-dialog">
@@ -66,7 +61,7 @@
 <% for(let p of result[0].posts) { %>
 <div class="d-flex justify-content-center">
   <div class="col-sm-12 col-md-8 col-lg-6">
-    <div class="card noth">
+    <div class="width-changer card noth">
       <div class="card-body">
         <h5 class="card-title"><%= user.FirstName %> <%= user.LastName %></h5>
         <h6 class="card-subtitle mb-2 text-muted">@<%= user.username %> &#183 <%= formatDate(p.createdAt, true) %> </h6>

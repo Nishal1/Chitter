@@ -1,5 +1,6 @@
 const Post = require('../models/post');
-const { formatDate } = require('../helper');
+const User = require('../models/user');
+const { formatDate, isFollowing } = require('../helper');
 
 module.exports.index = async (req, res) => {
     const posts = await Post.find().populate('author');
@@ -84,13 +85,14 @@ module.exports.showLikes = async (req, res) => {
     try {
         const { id } = req.params;
         const post = await Post.findById(id).populate('likes');
+        const user = await User.findById(req.user._id);
         
         if(!post) {
             req.flash('error', 'Something went wrong');
             return res.redirect('/posts');
         }
 
-        res.render('posts/like', { post });
+        res.render('posts/like', { post, isFollowing });
 
     } catch(e) {
         res.status(500).send("Something went wrong");
