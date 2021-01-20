@@ -107,11 +107,11 @@ nav {
     color: black;
 }
 
-.likes {
+/* .likes {
     border: 1px solid grey;
     margin-bottom: 0px;
     border-radius: 0%;
-}
+} */
 
 .go-right {
     float: right;
@@ -121,4 +121,8 @@ nav {
     display: inline-block; 
     margin-right: 60px;
     text-align: center;
+}
+
+.pink {
+    background-color: #c90000;
 }

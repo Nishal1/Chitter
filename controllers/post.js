@@ -1,10 +1,10 @@
 const Post = require('../models/post');
 const User = require('../models/user');
-const { formatDate, isFollowing } = require('../helper');
+const { formatDate, isFollowing, hasAldreadyLiked } = require('../helper');
 
 module.exports.index = async (req, res) => {
     const posts = await Post.find().populate('author');
-    res.render('posts/index', { posts, formatDate });
+    res.render('posts/index', { posts, formatDate, hasAldreadyLiked });
 }
 
 module.exports.renderNewForm = (req, res) => {
@@ -65,16 +65,26 @@ module.exports.likePost = async (req, res) => {
     try {
         const { id } = req.params;
         const post = await Post.findById(id);
-
+        
         if (!post) {
             req.flash('error', 'Something went wrong');
             return res.redirect('/posts');
         }
-
-        post.likes.push(req.user._id);
+        if(hasAldreadyLiked(post, req.user._id)) {
+            //remove like
+            for(let i = 0; i < post.likes.length; i++) {
+                if(post.likes[i].equals(req.user._id)) {
+                    post.likes.splice(i, 1);
+                    break;
+                }
+            }
+            req.flash('success', 'UnLiked');
+        } else {
+            post.likes.push(req.user._id);
+            req.flash('success', 'Liked');
+        }
+        
         await post.save();
-
-        req.flash('success', 'Liked');
         res.redirect('/posts');
     } catch(e) {
         res.status(500).send("Something went wrong");

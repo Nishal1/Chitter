@@ -60,3 +60,20 @@ module.exports.isFollowingAlready = async (req, res, next) => {
     req.flash('error', 'Need to follow inorder to unfollow');
     res.redirect(`/profile/${id}`);
 }
+
+module.exports.hasLikedAldready = async (req, res, next) => {
+    const { id } = req.params;
+    const userId = req.user._id;
+    const post = await Post.findById(id);
+    let flag = false;
+    for(let obj of post.likes) {
+        if(obj.equals(userId)) {
+            flag = true;
+        }
+    }
+    if(flag) {
+        req.flash('error', 'Aldready liked this post');
+        return res.redirect(`/posts/${id}`);
+    }
+    next();
+}

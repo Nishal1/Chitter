@@ -23,3 +23,12 @@ module.exports.isFollowing = (signedInUser, id) => {
     }
     return false;
 }
+
+module.exports.hasAldreadyLiked = (post, signedInUserId) => {
+  for(let likedUser of post.likes) {
+    if(likedUser.equals(signedInUserId)) {
+      return true;
+    }
+  }
+  return false;
+}

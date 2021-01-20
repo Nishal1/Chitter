@@ -3,7 +3,7 @@ const router = express.Router();
 const catchAsync = require('../utils/catchAsync');
 const posts = require('../controllers/post');
 const Post = require('../models/post');
-const { isLoggedin, isAuthor } = require('../middleware');
+const { isLoggedin, isAuthor, hasLikedAldready } = require('../middleware');
 
 router.route('/')
     .get(isLoggedin, catchAsync(posts.index))

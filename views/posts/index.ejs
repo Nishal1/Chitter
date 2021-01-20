@@ -36,9 +36,10 @@
         <p class="card-text"><%= post.body %> </p>
         <a href="/posts/<%= post._id %>" class="card-link">View</a>
         <div class="ui labeled button" tabindex="0">
-          <form action="/posts/<%= post._id %>/like" method="POST">
-            <button class="ui button">
-              <i class="heart icon"></i> Like
+          <form class="<%= hasAldreadyLiked(post, currentUser._id)? 'pink' : '' %>" action="/posts/<%= post._id %>/like" method="POST">
+            <button class="<%= hasAldreadyLiked(post, currentUser._id)? 'pink': '' %> ui button">
+              <i class="heart icon"></i> <%= hasAldreadyLiked(post, currentUser._id)? 'Unlike': 'Like' %>
+              
             </button>
           </form> 
 

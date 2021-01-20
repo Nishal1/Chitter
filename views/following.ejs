@@ -8,16 +8,36 @@
           </div>
       </div>
     </div>
-  <% } %> 
+  <% } else { %>
+    <div class="d-flex justify-content-center">
+        <h4>Following</h4>
+    </div>
+<% } %> 
 
 <% for(let following of users.following) { %>
-    <div class="d-flex justify-content-center">
-      <div class="col-sm-12 col-md-8 col-lg-6">
-        <div onclick="location.href='/profile/<%= following._id %>'" class="card noth">
-          <div class="width-changer card-body">
+  <div class="d-flex justify-content-center">
+    <div class="col-sm-12 col-md-8 col-lg-6">
+      <div onclick="location.href='/profile/<%= following._id %>'" class="width-changer card noth">
+        <div class="card-body">
+          <div class="likes-display">
             <h5 class="card-title"><%= following.FirstName %> <%= following.LastName %></h5>
-          </div>
+        </div>
+        <div class="go-right">
+            <% if(currentUser && !currentUser.equals(following._id) && !isFollowing(currentUser, following._id)) { %>
+                <form class="inner" action="/profile/<%= following._id%>/follow" method="POST">
+                    <button class="btn btn-success btn-block">Follow</button>
+                </form>
+                <% } %>
+                <% if(isFollowing(currentUser, following._id)) { %>
+                <form class="inner" action="/profile/<%= following._id%>/unfollow" method="POST">
+                    <button id="unfollow" class="inner btn btn-success btn-block" class="btn btn-primary">
+                        &#10003; Following
+                    </button>
+                </form>
+                <% } %>
+        </div>
         </div>
       </div>
     </div>
+  </div>
     <% } %>

@@ -70,14 +70,14 @@ module.exports.renderFollowers = async (req, res) => {
     const { id } = req.params;
     const users = await User.findById(id).populate('follower');
     
-    res.render('followers', { users });
+    res.render('followers', { users, isFollowing });
 }
 
 module.exports.renderFollowing = async (req, res) => {
     const { id } = req.params;
     const users = await User.findById(id).populate('following');
     
-    res.render('following', { users });;
+    res.render('following', { users, isFollowing });;
 }
 
 module.exports.unfollow = async (req, res) => {
