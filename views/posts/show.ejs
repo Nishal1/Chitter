@@ -9,14 +9,26 @@
           <h6 class="card-subtitle mb-2 text-muted">@<%= post.author.username %> &#183
             <%= formatDate(post.createdAt, true) %></h6>
           <p class="card-text"><%= post.body %> </p>
-          <a href="#" class="card-link">Comment</a>
-
+          <div class="ui labeled button" tabindex="0">
+            <form class="" action="/posts/<%= post._id %>/like"
+              method="POST">
+              <button id="like-button" class="<%= hasAldreadyLiked(post, currentUser._id)? 'pink': '' %>">
+                <i class="far fa-thumbs-up"></i> <%= hasAldreadyLiked(post, currentUser._id)? 'Unlike': 'Like' %>
+  
+              </button>
+            </form>
+         </div>
+         <a href="/posts/<%= post._id %>/likes" class="likes-number">
+          <%= post.likes.length %>
+        </a>
+        <div class="ui labeled button">
           <% if(currentUser && post.author.equals(currentUser._id)) { %>
-          <a href="/posts/<%= post._id %>/edit" class="card-link">Edit</a>
-          <form class="inline" action="/posts/<%= post._id%>?_method=DELETE" method="POST">
-            <button class="btn btn-danger">Delete</button>
-          </form>
-          <% } %>
+            <a href="/posts/<%= post._id %>/edit" class="card-link"><i class="fas fa-edit"></i>Edit</a>
+            <form class="" action="/posts/<%= post._id%>?_method=DELETE" method="POST">
+              <button id="delete-button"><i class="far fa-trash-alt"></i> Delete</button>
+            </form>
+            <% } %>
+        </div>
 
         </div>
       </div>
@@ -29,10 +41,6 @@
               <%= formatDate(comment.createdAt, true) %></span></h6>
           <h6 class="card-subtitle mb-2 text-muted">reply to @<%= post.author.username %> </h6>
           <p class="card-text"><%= comment.body %> </p>
-          <!-- <a href="/posts/<%= post._id %>/edit" class="card-link">Edit</a> -->
-          <!-- <form class="inline" action="/posts/<%= post._id%>?_method=DELETE" method="POST">
-              <button class="btn btn-danger">Delete</button>
-            </form> -->
         </div>
       </div>
       <% } %>

@@ -14,7 +14,7 @@
           </div>
         </div>
 
-        <button class="btn btn-success btn-block">Post!</button>
+        <button class="btn btn-success btn-block"><i class="fas fa-pencil-alt"></i> Post!</button>
       </form>
 
     </div>
@@ -36,18 +36,17 @@
         <p class="card-text"><%= post.body %> </p>
         <a href="/posts/<%= post._id %>" class="card-link">View</a>
         <div class="ui labeled button" tabindex="0">
-          <form class="<%= hasAldreadyLiked(post, currentUser._id)? 'pink' : '' %>" action="/posts/<%= post._id %>/like" method="POST">
-            <button class="<%= hasAldreadyLiked(post, currentUser._id)? 'pink': '' %> ui button">
-              <i class="heart icon"></i> <%= hasAldreadyLiked(post, currentUser._id)? 'Unlike': 'Like' %>
-              
-            </button>
-          </form> 
+          <form class="" action="/posts/<%= post._id %>/like"
+            method="POST">
+            <button id="like-button" class="<%= hasAldreadyLiked(post, currentUser._id)? 'pink': '' %>">
+              <i class="far fa-thumbs-up"></i> <%= hasAldreadyLiked(post, currentUser._id)? 'Unlike': 'Like' %>
 
-          <a href="/posts/<%= post._id %>/likes" class="ui basic label">
-            <%= post.likes.length %> 
-          </a>
-        </div>
-          
+            </button>
+          </form>
+       </div>
+       <a href="/posts/<%= post._id %>/likes" class="likes-number">
+        <%= post.likes.length %>
+      </a>
 
       </div>
     </div>

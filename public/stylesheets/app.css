@@ -27,6 +27,11 @@ nav {
     border-radius: 10px;
     margin-bottom: 5px;
 }
+ .card-link {
+    color: white;
+    text-decoration: none;
+    margin-right: 15px;
+ }
 
 .width-changer {
     min-width: 500px
@@ -124,5 +129,34 @@ nav {
 }
 
 .pink {
-    background-color: #c90000;
+    color: #F42160 !important;
+}
+
+#like-button {
+    padding: 2px;
+    margin-left: 10px;
+    margin-right: 2px;
+    background: transparent;
+    color: white;
+    border: none;
+}
+
+.likes-number {
+    color: white;
+    font-weight: 800;
+    text-decoration: none;
+    border-left: 1px solid white;
+    padding: 3px;
+    margin-right: 15px;
+}
+
+#delete-button {
+    padding: 2px;
+    background: transparent;
+    color: white;
+    border: none;
+}
+
+#delete-button:hover {
+    color: red;
 }
