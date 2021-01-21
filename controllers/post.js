@@ -83,9 +83,8 @@ module.exports.likePost = async (req, res) => {
             post.likes.push(req.user._id);
             req.flash('success', 'Liked');
         }
-        
         await post.save();
-        res.redirect('/posts');
+        res.redirect(`/posts/${id}`);
     } catch(e) {
         res.status(500).send("Something went wrong");
     }

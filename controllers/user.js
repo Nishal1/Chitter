@@ -1,4 +1,5 @@
 const User = require('../models/user');
+const emailSender = require('../utils/sendEmail');
 
 module.exports.renderRegister = (req, res) => {
     res.render('users/register');
@@ -11,6 +12,7 @@ module.exports.register = async (req, res, next) => {
         const newUser = await User.register(user, password);
         req.login(newUser, (err) => {
             if(err) return next(err);
+            emailSender.sendMail(user);
             req.flash('success', 'Welcome to Chitter');
             res.redirect('/posts');
         });

@@ -160,3 +160,12 @@ nav {
 #delete-button:hover {
     color: red;
 }
+
+#fixed-button {
+    position: fixed;
+    bottom: 10vh;
+    right: 35px;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+}

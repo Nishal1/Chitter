@@ -4,6 +4,7 @@ const User = require('../models/user');
 const catchAsync = require('../utils/catchAsync');
 const passport = require('passport');
 const users = require('../controllers/user');
+const { isLoggedin } = require('../middleware');
 
 
 router.route('/register')
@@ -15,6 +16,6 @@ router.route('/login')
     .post(passport.authenticate('local', { failureFlash: true, failureRedirect: '/login'}), users.login);
 
 router.route('/logout')
-    .get(users.logout)
+    .get(users.logout);
 
 module.exports = router;

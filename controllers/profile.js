@@ -46,7 +46,7 @@ module.exports.follow = async (req, res) => {
         const currUserId = req.user._id;
         const userToFollow = await User.findById(id);
         const currUser = await User.findById(currUserId);
-
+        
         if(!userToFollow || !currUser) {
             req.flash('error', 'Something went wrong');
             return res.redirect(`/profile/${id}`);
@@ -114,4 +114,9 @@ module.exports.unfollow = async (req, res) => {
     } catch (err) {
         res.status(500).send("Something went wrong");
     }
+}
+
+module.exports.renderUsers = async (req, res) => {
+        const users = await User.find();
+        res.render('users', { users });
 }
