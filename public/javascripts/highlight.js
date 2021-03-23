@@ -5,6 +5,5 @@ $('.noth').hover(
     },
     function (event) {
         $('.highlight').removeClass('highlight');
-
-    }
+    },
 );
