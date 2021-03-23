@@ -2,43 +2,48 @@ const Comment = require('../models/comment');
 const User = require('../models/user');
 const Post = require('../models/post');
 const ExpressError = require('../utils/ExpressError');
-const ObjectId = require("mongoose").Types.ObjectId;
+const ObjectId = require('mongoose').Types.ObjectId;
 const { formatDate, isFollowing } = require('../helper');
 
 module.exports.renderProfile = async (req, res) => {
-
     try {
         const authorId = req.params.id;
         const user = await User.findById(authorId);
         const result = await User.aggregate([
             {
                 $match: {
-                    _id: ObjectId(authorId)
-                }
+                    _id: ObjectId(authorId),
+                },
             },
             {
                 $lookup: {
-                    from: "posts",
-                    localField: "_id",
-                    foreignField: "author",
-                    as: "posts"
-                }
-            }
+                    from: 'posts',
+                    localField: '_id',
+                    foreignField: 'author',
+                    as: 'posts',
+                },
+            },
         ]);
 
         const date = formatDate(req.user.createdAt, false);
         const displayFollow = isFollowing(req.user, authorId);
 
         if (result.length > 0) {
-            return res.render('profile', { result, date, user, displayFollow, formatDate });
+            return res.render('profile', {
+                result,
+                date,
+                user,
+                displayFollow,
+                formatDate,
+            });
         } else {
-            res.status(404).send("User not found");
+            res.status(404).send('User not found');
         }
     } catch (err) {
         console.log(err);
-        res.status(500).send("Something went wrong");
+        res.status(500).send('Something went wrong');
     }
-}
+};
 
 module.exports.follow = async (req, res) => {
     try {
@@ -46,8 +51,8 @@ module.exports.follow = async (req, res) => {
         const currUserId = req.user._id;
         const userToFollow = await User.findById(id);
         const currUser = await User.findById(currUserId);
-        
-        if(!userToFollow || !currUser) {
+
+        if (!userToFollow || !currUser) {
             req.flash('error', 'Something went wrong');
             return res.redirect(`/profile/${id}`);
         }
@@ -58,27 +63,26 @@ module.exports.follow = async (req, res) => {
         await userToFollow.save();
         await currUser.save();
 
-        req.flash('success', 'Followed')
+        req.flash('success', 'Followed');
         res.redirect(`/profile/${id}`);
-
     } catch (err) {
-        res.status(500).send("Something went wrong");
+        res.status(500).send('Something went wrong');
     }
-}
+};
 
 module.exports.renderFollowers = async (req, res) => {
     const { id } = req.params;
     const users = await User.findById(id).populate('follower');
-    
+
     res.render('followers', { users, isFollowing });
-}
+};
 
 module.exports.renderFollowing = async (req, res) => {
     const { id } = req.params;
     const users = await User.findById(id).populate('following');
-    
-    res.render('following', { users, isFollowing });;
-}
+
+    res.render('following', { users, isFollowing });
+};
 
 module.exports.unfollow = async (req, res) => {
     try {
@@ -86,20 +90,20 @@ module.exports.unfollow = async (req, res) => {
         const currUserId = req.user._id;
         const userToUnfollow = await User.findById(id);
         const currUser = await User.findById(currUserId);
-        if(!userToUnfollow || !currUser) {
+        if (!userToUnfollow || !currUser) {
             req.flash('error', 'Something went wrong');
             return res.redirect(`/profile/${id}`);
         }
 
-        for(let i = 0; i < userToUnfollow.follower.length; i++){ 
-            if (userToUnfollow.follower[i].equals(currUserId)) { 
-                userToUnfollow.follower.splice(i, 1); 
+        for (let i = 0; i < userToUnfollow.follower.length; i++) {
+            if (userToUnfollow.follower[i].equals(currUserId)) {
+                userToUnfollow.follower.splice(i, 1);
                 break;
             }
         }
 
-        for(let i = 0; i < currUser.following.length; i++) {
-            if(currUser.following[i].equals(id)) {
+        for (let i = 0; i < currUser.following.length; i++) {
+            if (currUser.following[i].equals(id)) {
                 currUser.following.splice(i, 1);
                 break;
             }
@@ -108,15 +112,14 @@ module.exports.unfollow = async (req, res) => {
         await userToUnfollow.save();
         await currUser.save();
 
-        req.flash('success', 'unfollowed')
+        req.flash('success', 'unfollowed');
         res.redirect(`/profile/${id}`);
-
     } catch (err) {
-        res.status(500).send("Something went wrong");
+        res.status(500).send('Something went wrong');
     }
-}
+};
 
 module.exports.renderUsers = async (req, res) => {
-        const users = await User.find();
-        res.render('users', { users });
-}
+    const users = await User.find();
+    res.render('users', { users });
+};

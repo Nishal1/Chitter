@@ -11,4 +11,4 @@ module.exports.createComment = async (req, res) => {
     await comment.save();
     req.flash('success', 'Created a new comment');
     res.redirect(`/posts/${req.params.id}`);
-}
+};

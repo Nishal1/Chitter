@@ -3,32 +3,43 @@ module.exports.formatDate = (x, reqDate) => {
     const month = x.getMonth();
     const dt = x.getDate();
     if (dt < 10) {
-      dt = '0' + dt;
+        dt = '0' + dt;
     }
-    const monthNames = ["January", "February", "March", "April", "May", "June",
-      "July", "August", "September", "October", "November", "December"
+    const monthNames = [
+        'January',
+        'February',
+        'March',
+        'April',
+        'May',
+        'June',
+        'July',
+        'August',
+        'September',
+        'October',
+        'November',
+        'December',
     ];
     let date = `${monthNames[month]} ${dt}, ${year}`;
-    if(reqDate === false){
+    if (reqDate === false) {
         date = `${monthNames[month]} ${year}`;
     }
     return date;
-  }
-  
+};
+
 module.exports.isFollowing = (signedInUser, id) => {
-    for(let obj of signedInUser.following) {
-        if(obj.equals(id)) {
+    for (let obj of signedInUser.following) {
+        if (obj.equals(id)) {
             return true;
         }
     }
     return false;
-}
+};
 
 module.exports.hasAldreadyLiked = (post, signedInUserId) => {
-  for(let likedUser of post.likes) {
-    if(likedUser.equals(signedInUserId)) {
-      return true;
+    for (let likedUser of post.likes) {
+        if (likedUser.equals(signedInUserId)) {
+            return true;
+        }
     }
-  }
-  return false;
-}
+    return false;
+};

@@ -5,13 +5,15 @@ const posts = require('../controllers/post');
 const Post = require('../models/post');
 const { isLoggedin, isAuthor, hasLikedAldready } = require('../middleware');
 
-router.route('/')
+router
+    .route('/')
     .get(isLoggedin, catchAsync(posts.index))
     .post(isLoggedin, catchAsync(posts.createPost));
 
 router.get('/new', isLoggedin, posts.renderNewForm);
 
-router.route('/:id')
+router
+    .route('/:id')
     .get(isLoggedin, catchAsync(posts.showPosts))
     .put(isLoggedin, isAuthor, catchAsync(posts.updatePost))
     .delete(isLoggedin, isAuthor, catchAsync(posts.deletePost));

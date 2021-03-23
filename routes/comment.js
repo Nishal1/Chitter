@@ -5,7 +5,6 @@ const Comment = require('../models/comment');
 const comments = require('../controllers/comment');
 const { isLoggedin } = require('../middleware');
 
-
 router.post('/', isLoggedin, catchAsync(comments.createComment));
 
 module.exports = router;
