@@ -82,7 +82,7 @@ module.exports.hasLikedAldready = async (req, res, next) => {
     next();
 };
 
-module.exports.validateCampground = (req, res, next) => {  
+module.exports.validatePost = (req, res, next) => {  
     const result = postSchema.validate(req.body);
     if(result.error){
         const msg = result.error.details.map(el => el.message).join(',');
@@ -92,7 +92,7 @@ module.exports.validateCampground = (req, res, next) => {
     }
 }
 
-module.exports.validateReview = (req, res, next) => {
+module.exports.validateComment = (req, res, next) => {
     const result = commentSchema.validate(req.body);
     if(result.error) {
         const msg = result.error.details.map(el => el.message).join(',');

@@ -3,19 +3,19 @@ const router = express.Router();
 const catchAsync = require('../utils/catchAsync');
 const posts = require('../controllers/post');
 const Post = require('../models/post');
-const { isLoggedin, isAuthor, hasLikedAldready, validateCampground } = require('../middleware');
+const { isLoggedin, isAuthor, hasLikedAldready, validatePost } = require('../middleware');
 
 router
     .route('/')
     .get(isLoggedin, catchAsync(posts.index))
-    .post(isLoggedin, validateCampground, catchAsync(posts.createPost));
+    .post(isLoggedin, validatePost, catchAsync(posts.createPost));
 
 router.get('/new', isLoggedin, posts.renderNewForm);
 
 router
     .route('/:id')
     .get(isLoggedin, catchAsync(posts.showPosts))
-    .put(isLoggedin, isAuthor, validateCampground, catchAsync(posts.updatePost))
+    .put(isLoggedin, isAuthor, validatePost, catchAsync(posts.updatePost))
     .delete(isLoggedin, isAuthor, catchAsync(posts.deletePost));
 
 router.get('/:id/edit', isLoggedin, catchAsync(posts.renderEditForm));
