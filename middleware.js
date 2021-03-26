@@ -101,3 +101,13 @@ module.exports.validateReview = (req, res, next) => {
         next();
     }
 }
+
+module.exports.isCommentAuthor = async (req, res, next) => {
+    const { id, commentId } = req.params;
+    const comment = await Comment.findById(commentId);
+    if(!comment.author.equals(req.user._id)) {
+        req.flash('error', 'You do not have permission to do that');
+        return res.redirect(`/posts/${ id }`);
+    }
+    next();
+}

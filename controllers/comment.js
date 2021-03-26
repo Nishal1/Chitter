@@ -11,4 +11,12 @@ module.exports.createComment = async (req, res) => {
     await comment.save();
     req.flash('success', 'Created a new comment');
     res.redirect(`/posts/${req.params.id}`);
-};
+}
+
+module.exports.deleteComment = async (req, res) => {
+    const { id, commentId } = req.params;
+    await Post.findByIdAndUpdate(id, { $pull: { comments: commentId}});
+    await Comment.findByIdAndDelete(commentId);
+    req.flash('success', 'Successfully deleted a comment');
+    res.redirect(`/posts/${id}`);
+}
