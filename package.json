@@ -30,6 +30,7 @@
     "express-mongo-sanitize": "^2.0.2",
     "express-session": "^1.17.1",
     "googleapis": "^67.0.0",
+    "joi": "^17.4.0",
     "method-override": "^3.0.0",
     "mongoose": "^5.11.11",
     "nodemailer": "^6.4.17",
