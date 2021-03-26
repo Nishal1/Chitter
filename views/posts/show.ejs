@@ -41,6 +41,14 @@
               <%= formatDate(comment.createdAt, true) %></span></h6>
           <h6 class="card-subtitle mb-2 text-muted">reply to @<%= post.author.username %> </h6>
           <p class="card-text"><%= comment.body %> </p>
+          <div class="ui labeled button">
+            <% if(currentUser && comment.author.equals(currentUser._id)) { %>
+              <a href="#" class="card-link"><i class="fas fa-edit"></i>Edit</a>
+              <form class="" action="/posts/<%= post._id %>/comments/<%= comment._id %>?_method=DELETE" method="POST">
+                <button id="delete-button"><i class="far fa-trash-alt"></i> Delete</button>
+              </form>
+              <% } %>
+          </div>
         </div>
       </div>
       <% } %>
