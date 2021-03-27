@@ -139,5 +139,19 @@ module.exports.renderUsers = async (req, res) => {
         users.push(await User.findById(x));
     }
     // console.log(users);
+    if(users.length < 1){    //=>people = [] 
+        for(let i = 0; i < currUser.follower.length - 1; i++){
+            const p = await User.findById(currUser.follower[i]);
+            const q = await User.findById(currUser.follower[i+1]);
+            let val = majorityFollowing(p.follower, q.follower);
+            if(!val.equals(currUser._id) && currUser.follower.includes(val))
+                people.push(val);
+        }
+
+        for(let x of people){
+            users.push(await User.findById(x));
+        }
+        return res.render('users', { users });
+    }
     res.render('users', { users });
 };
