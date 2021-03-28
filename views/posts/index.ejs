@@ -27,9 +27,9 @@
     Filter <i class="fas fa-filter"></i>
   </button>
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <a class="dropdown-item" href="#"><i class="fas fa-sort-amount-up-alt"></i>Newest to Oldest</a>
-    <a class="dropdown-item" href="#"><i class="fas fa-sort-amount-up"></i>Oldest to Newest</a>
-    <a class="dropdown-item" href="#">For you</a>
+    <a class="dropdown-item" href="/posts/ascending-posts/<%= currentUser._id %> "><i class="fas fa-sort-amount-up-alt"></i>Newest to Oldest</a>
+    <a class="dropdown-item" href="/posts/descending-posts/<%= currentUser._id %> "><i class="fas fa-sort-amount-up"></i>Oldest to Newest</a>
+    <a class="dropdown-item" href="/posts/for-you/<%= currentUser._id %>">For you</a>
   </div>
 </div>
 
