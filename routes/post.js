@@ -24,4 +24,6 @@ router.post('/:id/like', isLoggedin, catchAsync(posts.likePost));
 
 router.get('/:id/likes', isLoggedin, catchAsync(posts.showLikes));
 
+router.get('/for-you/:userId', isLoggedin, catchAsync(posts.forYouIndex));
+
 module.exports = router;

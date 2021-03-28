@@ -7,6 +7,26 @@ module.exports.index = async (req, res) => {
     res.render('posts/index', { posts, formatDate, hasAldreadyLiked });
 };
 
+module.exports.forYouIndex = async (req, res) => {
+    const following = req.user.following;
+    const pos = [];
+    const posts = [];
+    console.log(following);
+    for(let f of following){
+        pos.push(await Post.find({ author: f._id }).populate('author'));
+    }
+
+    for(let i = 0; i < pos.length ; i ++) {
+        for(let j = 0; j < pos[i].length; j++){
+            posts.push(pos[i][j]);
+        }
+    }
+
+    console.log(posts);
+    //console.log(pos);
+    res.render('posts/index', { posts, formatDate, hasAldreadyLiked });
+}
+
 module.exports.renderNewForm = (req, res) => {
     res.render('posts/new');
 };
