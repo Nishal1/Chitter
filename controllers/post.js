@@ -53,7 +53,7 @@ module.exports.decreasingIndex = async (req, res) => {
 }
 
 module.exports.increasingIndex = async (req, res) => {
-    let posts = [];
+    let  posts = [];
     if(flag === 0) {
         let p = await Post.find().populate('author');
         posts = p;
