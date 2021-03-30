@@ -5,7 +5,7 @@ const extension = (joi) => ({
     type: 'string',
     base: joi.string(),
     messages: {
-        'string.escapeHTML': '{{#label}} must not include HTML!'
+        'string.escapeHTML': '{{#label}} must not include HTML!',
     },
     rules: {
         escapeHTML: {
@@ -14,26 +14,26 @@ const extension = (joi) => ({
                     allowedTags: [],
                     allowedAttributes: {},
                 });
-                if (clean !== value) return helpers.error('string.escapeHTML', { value })
+                if (clean !== value)
+                    return helpers.error('string.escapeHTML', { value });
                 return clean;
-            }
-        }
-    }
+            },
+        },
+    },
 });
 
 const Joi = BaseJoi.extend(extension);
 
 const postSchema = Joi.object({
-    post: Joi.object({body: Joi.string().required().escapeHTML()
-    }).required()
+    post: Joi.object({ body: Joi.string().required().escapeHTML() }).required(),
 });
 
 module.exports.postSchema = postSchema;
 
 const commentSchema = Joi.object({
-    comment: Joi.object({ 
-    body: Joi.string().required().escapeHTML()
-    }).required()
+    comment: Joi.object({
+        body: Joi.string().required().escapeHTML(),
+    }).required(),
 });
 
 module.exports.commentSchema = commentSchema;

@@ -82,32 +82,32 @@ module.exports.hasLikedAldready = async (req, res, next) => {
     next();
 };
 
-module.exports.validatePost = (req, res, next) => {  
+module.exports.validatePost = (req, res, next) => {
     const result = postSchema.validate(req.body);
-    if(result.error){
-        const msg = result.error.details.map(el => el.message).join(',');
+    if (result.error) {
+        const msg = result.error.details.map((el) => el.message).join(',');
         throw new ExpressError(msg, 400);
     } else {
         next();
     }
-}
+};
 
 module.exports.validateComment = (req, res, next) => {
     const result = commentSchema.validate(req.body);
-    if(result.error) {
-        const msg = result.error.details.map(el => el.message).join(',');
+    if (result.error) {
+        const msg = result.error.details.map((el) => el.message).join(',');
         throw new ExpressError(msg, 400);
     } else {
         next();
     }
-}
+};
 
 module.exports.isCommentAuthor = async (req, res, next) => {
     const { id, commentId } = req.params;
     const comment = await Comment.findById(commentId);
-    if(!comment.author.equals(req.user._id)) {
+    if (!comment.author.equals(req.user._id)) {
         req.flash('error', 'You do not have permission to do that');
-        return res.redirect(`/posts/${ id }`);
+        return res.redirect(`/posts/${id}`);
     }
     next();
-}
+};
