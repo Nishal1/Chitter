@@ -1,3 +1,60 @@
-<h1>Home....</h1>
-<a href="/login">Log in</a>
-<a href="/register">register</a>
+<% layout('./layouts/boilerplate') -%>
+<header id="showcase">
+    <div class="bg-landing"></div>
+    <div class="container">
+        <div class="row align-items-center">
+            <div id="header-text" class="col-md-12">
+                <div data-aos="flip-up" data-aos-duration="1500"><img src="/images/chitter-logo-transp.png" alt="chitter logo"/></div>
+                <div data-aos="fade-right" data-aos-duration="1600">
+                    <h1>Connect easy, with Chitter</h1>
+                </div>
+                <p>
+                    Chitter is a social media application <br> 
+                    that helps you connect with your loved ones <br>
+                    within finger tips 
+                    <div data-aos="fade-left" data-aos-duration="1000"><span id="landing-q1">"Chitter your thoughts"</span></div>
+                </p>
+                <a href="#">Get Started</a>
+                <!-- <img src="/images/rocket.webp" alt="rocket illustration" style="float: right;"> -->
+            </div>
+        </div>
+    </div>
+</header>
+
+<section id="landing-s1">
+    <div class="container">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-md-6">
+                <img src="/images/group-bottom.webp" alt="group illustration" class="img-fluid"/>
+            </div>
+        </div>
+        <div class="row justify-content-center align-items-center" style="padding: 2em 0;">
+            <div class="col-md-6">
+                <img src="/images/social.svg" class="img-fluid" alt="social illustration" 
+                data-aos="zoom-in-left" data-aos-duration="1500"/>
+            </div>
+            <div class="col-md-6" id="landing-s1-text">
+                <h1 data-aos="fade-down" data-aos-duration="1000">Chitter is so easy to use and easy to connect.</h1>
+                <p data-aos="fade-up" data-aos-duration="1200">
+                    Connect with your loved ones, share your thoughts 
+                    to the world with our easy to use and 
+                    simple UI, loaded with a lots of 
+                    other Features
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="landing-s2">
+
+</section>
+
+<div class="progressbar">
+    <ul>
+        <li><a href="#showcase" id="bar1" class="active-bar"> </a></li>
+        <li><a href="#landing-s1" id="bar2"> </a></li>
+        <li><a href="#" id="bar3"> </a></li>
+        <li><a href="#" id="bar4"> </a></li>
+    </ul>
+</div>

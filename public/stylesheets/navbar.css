@@ -1,0 +1,123 @@
+@import url("font-awesome/css/fontawesome-all.min.css");
+
+#main-nav {
+    position: relative;
+    max-width: 1200px;
+    margin: auto;
+    margin-top: 20px;
+    padding: 10px;
+    background: transparent;
+    box-sizing: border-box;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    font-family: 'Rubik', sans-serif;
+}
+
+.logo{
+    font-family: 'Kaushan Script', cursive;
+    color: black;
+    height: 60px;
+    font-size: 40px;
+    line-height: 60px;
+    padding: 0 20px;
+    text-align: center;
+    box-sizing: border-box;
+    float: left;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.logo:hover{
+    color: black;
+}
+
+nav{
+    float: right;
+}
+
+.clearfix{
+    clear: both;
+}
+
+nav ul{
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+nav ul li{
+    list-style: none;
+}
+
+nav ul li a{
+    display: block;
+    margin: 10px 0;
+    padding: 10px 20px;
+    text-decoration: none;
+    color: #fff;
+    font-weight: 500;
+    font-size: 18px;
+    font-family: 'Rubik', sans-serif;
+}
+
+nav ul li a:hover{
+    background: #fa003f;
+    border-radius: 7px;
+    color: #fff;
+    transition: 0.5s;
+}
+
+@media (max-width: 1200px) {
+    #main-nav{
+        margin: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .menu-toggle{
+        display: block;
+        width: 40px;
+        height: 40px;
+        margin: 10px;
+        float: right;
+        cursor: pointer;
+        text-align: center;
+        font-size: 30px;
+        color: #fa003f;
+    }
+
+    .menu-toggle:before{
+        /* content: url('../images/bars-solid.svg'); */
+        content: "\f0c9";
+        font-family: 'Font Awesome 5 Free';
+        font-weight: 900;
+        line-height: 40px;
+    }
+    .menu-toggle.active:before{
+        /* content: url('../images/bars-solid.svg'); */
+        content: "\f00d";
+        font-family: 'Font Awesome 5 Free';
+    }
+
+    nav{
+        display: none;
+    }
+    nav.active{
+        display: block;
+        width: 100%;
+    }
+    nav.active ul{
+        display: block;
+        padding: 0 auto;
+    }
+    nav.active ul li a{
+        margin: 0;
+    }
+}
+
+/* Landing NavBar */
+#home #main-nav .logo{
+    color: #fff;
+    font-family: 'Kaushan Script', cursive;
+}
