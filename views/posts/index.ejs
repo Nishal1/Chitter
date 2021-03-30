@@ -1,67 +1,70 @@
 <% layout('layouts/boilerplate') %>
 
 <h1>Hello, <%= currentUser.FirstName %> <%= currentUser.LastName %> </h1>
+<!-- d-flex justify-content-center -->
 
-<div class="d-flex justify-content-center">
-  <div class="col-sm-12 col-md-8 col-lg-6">
-    <div class="width-changer card shadow p-3">
-      <form action="/posts" method="POST" class="validated-form" novalidate>
-        <div class="mb-3">
-          <textarea class="form-control" type="text" id="body" name="post[body]" placeholder="What's happening?"
-            required></textarea>
-          <div class="valid-feedback">
-            Looks good!
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12 col-md-8 col-lg-6">
+        <div class="width-changer card shadow p-3">
+          <form action="/posts" method="POST" class="validated-form" novalidate>
+            <div class="mb-3">
+              <textarea class="form-control" type="text" id="body" name="post[body]" placeholder="What's happening?"
+                required></textarea>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+            </div>
+    
+            <button class="btn btn-success btn-block"><i class="fas fa-pencil-alt"></i> Post!</button>
+          </form>
+    
+        </div>
+      </div>  
+        <div class="dropdown">
+          <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Filter <i class="fas fa-filter"></i>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="/posts/ascending-posts/<%= currentUser._id %> "><i class="fas fa-sort-amount-up-alt"></i>Newest to Oldest</a>
+            <a class="dropdown-item" href="/posts/descending-posts/<%= currentUser._id %> "><i class="fas fa-sort-amount-up"></i>Oldest to Newest</a>
+            <a class="dropdown-item" href="/posts/for-you/<%= currentUser._id %>">For you</a>
           </div>
         </div>
 
-        <button class="btn btn-success btn-block"><i class="fas fa-pencil-alt"></i> Post!</button>
-      </form>
-
+        <% for(let post of posts) { %>
+          <div class="col-sm-12 col-md-8 col-lg-6">
+            <div class="width-changer card noth">
+              <div class="card-body">
+                <h5 class="card-title"><a href="/profile/<%= post.author._id%>"><%= post.author.FirstName %>
+                    <%= post.author.LastName %></a></h5>
+                <h6 class="card-subtitle mb-2 text-muted">@<%= post.author.username %> &#183
+                  <%= formatDate(post.createdAt, true) %> </h6>
+                <p class="card-text"><%= post.body %> </p>
+                <a href="/posts/<%= post._id %>" class="card-link">View</a>
+                <div class="ui labeled button" tabindex="0">
+                  <form class="" action="/posts/<%= post._id %>/like"
+                    method="POST">
+                    <button id="like-button" class="<%= hasAldreadyLiked(post, currentUser._id)? 'pink': '' %>">
+                      <i class="far fa-thumbs-up"></i> <%= hasAldreadyLiked(post, currentUser._id)? 'Unlike': 'Like' %>
+                    </button>
+                  </form>
+               </div>
+               <a href="/posts/<%= post._id %>/likes" class="likes-number">
+                <%= post.likes.length %>
+              </a>
+              </div>
+            </div>
+          </div>
+              
+         
+          <% } %>
+          
+    </div>
     </div>
   </div>
-</div>
-</div>
-
-<div class="dropdown">
-  <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Filter <i class="fas fa-filter"></i>
-  </button>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <a class="dropdown-item" href="/posts/ascending-posts/<%= currentUser._id %> "><i class="fas fa-sort-amount-up-alt"></i>Newest to Oldest</a>
-    <a class="dropdown-item" href="/posts/descending-posts/<%= currentUser._id %> "><i class="fas fa-sort-amount-up"></i>Oldest to Newest</a>
-    <a class="dropdown-item" href="/posts/for-you/<%= currentUser._id %>">For you</a>
-  </div>
-</div>
-
-<% for(let post of posts) { %>
-<div class="d-flex justify-content-center">
-  <div class="col-sm-12 col-md-8 col-lg-6">
-    <div class="width-changer card noth">
-      <div class="card-body">
-        <h5 class="card-title"><a href="/profile/<%= post.author._id%>"><%= post.author.FirstName %>
-            <%= post.author.LastName %></a></h5>
-        <h6 class="card-subtitle mb-2 text-muted">@<%= post.author.username %> &#183
-          <%= formatDate(post.createdAt, true) %> </h6>
-        <p class="card-text"><%= post.body %> </p>
-        <a href="/posts/<%= post._id %>" class="card-link">View</a>
-        <div class="ui labeled button" tabindex="0">
-          <form class="" action="/posts/<%= post._id %>/like"
-            method="POST">
-            <button id="like-button" class="<%= hasAldreadyLiked(post, currentUser._id)? 'pink': '' %>">
-              <i class="far fa-thumbs-up"></i> <%= hasAldreadyLiked(post, currentUser._id)? 'Unlike': 'Like' %>
-
-            </button>
-          </form>
-       </div>
-       <a href="/posts/<%= post._id %>/likes" class="likes-number">
-        <%= post.likes.length %>
-      </a>
-
-      </div>
-    </div>
-  </div>
-</div>
-<% } %>
-
-<a href="/posts/new"><button id="fixed-button"class="btn btn-success btn-block">+<i class="fas fa-pencil-alt"></i></button></a>
   
+  <a href="/posts/new"><button id="fixed-button"class="btn btn-success btn-block">+<i class="fas fa-pencil-alt"></i></button></a>
+    
+  
+

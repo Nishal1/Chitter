@@ -29,4 +29,6 @@ router.get('/following', isLoggedin, catchAsync(profile.renderFollowing));
 
 router.get('/explore', isLoggedin, catchAsync(profile.renderUsers));
 
+router.post('/search', isLoggedin, catchAsync(profile.search));
+
 module.exports = router;
