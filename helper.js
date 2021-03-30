@@ -63,4 +63,3 @@ module.exports.majorityFollowing = (l1, l2) => {
     return c;
 }
 
-

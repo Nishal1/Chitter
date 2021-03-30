@@ -157,3 +157,18 @@ module.exports.renderUsers = async (req, res) => {
     }
     res.render('users', { users });
 };
+
+module.exports.search = async (req, res) => {
+    let { key }  = req.body;
+    let users = await User.find({username:  {$regex: ".*" + key + ".*", $options: 'i'}});
+    if(users.length < 1){
+        users = await User.find({userName: {$regex: ".*" + key.substring(0, key.indexOf(' ')) + ".*", $options: 'i'}}); 
+        console.log(key + 'firstname');
+            if(users.length < 1) {
+                users = await User.find({userName: {$regex: ".*" + key.substring(key.indexOf(' ')) + ".*", $options: 'i'}});
+                console.log(key + 'lastname');
+            }
+    }
+    console.log(users);
+    res.render('users', { users });
+}
