@@ -3,7 +3,7 @@ const User = require('../models/user');
 const Post = require('../models/post');
 const ExpressError = require('../utils/ExpressError');
 const ObjectId = require('mongoose').Types.ObjectId;
-const { formatDate, isFollowing } = require('../helper');
+const { formatDate, isFollowing , majorityFollowing } = require('../helper');
 
 module.exports.renderProfile = async (req, res) => {
     try {
@@ -120,6 +120,40 @@ module.exports.unfollow = async (req, res) => {
 };
 
 module.exports.renderUsers = async (req, res) => {
-    const users = await User.find();
+    // const users = await User.find();
+    const currUser = req.user;
+    let people = [];
+
+    for(let i = 0; i < currUser.following.length - 1; i++){
+        const p = await User.findById(currUser.following[i]);
+        const q = await User.findById(currUser.following[i+1]);
+        let val = majorityFollowing(p.following, q.following);
+        if(!val.equals(currUser._id) && !currUser.following.includes(val))
+            people.push(val);
+    }
+    // console.log(people);
+    people = [...new Set(people)];
+    // console.log(people);
+    const users = [];
+    for(let x of people){
+        users.push(await User.findById(x));
+    }
+    // console.log(users);
+    if(users.length < 1){    //=>people = [] 
+        for(let i = 0; i < currUser.follower.length ; i++){
+            // const p = await User.findById(currUser.follower[i]);
+            // const q = await User.findById(currUser.follower[i+1]);
+            // let val = majorityFollowing(p.follower, q.follower);
+            if(!currUser.following.includes(currUser.follower[i]))
+                people.push(currUser.follower[i]);
+        }
+
+        people = [...new Set(people)];
+
+        for(let x of people){
+            users.push(await User.findById(x));
+        }
+        return res.render('users', { users });
+    }
     res.render('users', { users });
 };
