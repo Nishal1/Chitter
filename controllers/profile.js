@@ -120,8 +120,10 @@ module.exports.unfollow = async (req, res) => {
 };
 
 module.exports.renderUsers = async (req, res) => {
-    // const users = await User.find();
     const currUser = req.user;
+    let similarPlaceUsers = await User.find({location: req.user.location, _id: {$ne:[req.user._id]}});
+    console.log(similarPlaceUsers);
+
     let people = [];
 
     for(let i = 0; i < currUser.following.length - 1; i++){
@@ -134,7 +136,8 @@ module.exports.renderUsers = async (req, res) => {
     // console.log(people);
     people = [...new Set(people)];
     // console.log(people);
-    const users = [];
+    let users = [];
+    users = [...new Set(similarPlaceUsers)];
     for(let x of people){
         users.push(await User.findById(x));
     }
@@ -155,6 +158,16 @@ module.exports.renderUsers = async (req, res) => {
         }
         return res.render('users', { users });
     }
+    for(let i = 0; i < users.length; i++){
+       for(let j = 0; j < currUser.following.length; j++){
+           if(currUser.following[i].equals(users[i]._id)){
+               users.splice(i, 1);
+               i--;
+           }
+
+       }
+    }
+    console.log(users);
     res.render('users', { users });
 };
 
@@ -163,12 +176,9 @@ module.exports.search = async (req, res) => {
     let users = await User.find({username:  {$regex: ".*" + key + ".*", $options: 'i'}});
     if(users.length < 1){
         users = await User.find({userName: {$regex: ".*" + key.substring(0, key.indexOf(' ')) + ".*", $options: 'i'}}); 
-        console.log(key + 'firstname');
             if(users.length < 1) {
                 users = await User.find({userName: {$regex: ".*" + key.substring(key.indexOf(' ')) + ".*", $options: 'i'}});
-                console.log(key + 'lastname');
             }
     }
-    console.log(users);
     res.render('users', { users });
 }

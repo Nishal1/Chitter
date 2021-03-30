@@ -18,6 +18,24 @@ const UserSchema = new Schema(
             required: true,
             unique: true,
         },
+        location: String,
+        geometry: {
+            type: {
+                type: String,
+                enum: ['Point'],
+                required: true
+            },
+            coordinates: {
+                type: [Number],
+                required: true
+            }
+        },
+        bio: String,
+        gender: {
+            type: String,
+            enum: ['Male', 'Female'],
+            required: true
+        },
         following: [
             {
                 type: Schema.Types.ObjectId,
