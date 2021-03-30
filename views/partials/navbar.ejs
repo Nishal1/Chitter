@@ -3,8 +3,23 @@
     <div class="menu-toggle"></div>
     <nav>
         <ul>
-            <li><a href="#" style="margin-right: 1em;">Login</a></li>
-            <li><a href="#" style="background: #fa003f; border-radius: 7px;">Sign Up</a></li>
+            <% if(currentUser){ %>
+                <li><a href="/posts"><i class="fas fa-home"></i> Home</a></li>
+                <li>
+                    <a href="#">
+                        <i class="fas fa-user"></i> <%= currentUser.FirstName%> <%= currentUser.LastName%> 
+                    </a>
+                </li>
+                <li>
+                    <a href="/profile/<%= currentUser._id %>"><i class="fas fa-user"></i> Profile</a> 
+                </li>
+                <li>
+                    <a href="/logout"><i class="fas fa-sign-out-alt"></i> Log Out</a>
+                </li>
+            <% } else { %>
+                <li><a href="/login" style="margin-right: 1em;">Login</a></li>
+                <li><a href="/register" style="background: #fa003f; border-radius: 7px;">Sign Up</a></li>
+            <% } %>
         </ul>
     </nav>
     <div class="clearfix"></div>
