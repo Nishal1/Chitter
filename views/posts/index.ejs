@@ -27,9 +27,10 @@
     Filter <i class="fas fa-filter"></i>
   </button>
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <a class="dropdown-item" href="#"><i class="fas fa-sort-amount-up-alt"></i>Newest to Oldest</a>
-    <a class="dropdown-item" href="#"><i class="fas fa-sort-amount-up"></i>Oldest to Newest</a>
-    <a class="dropdown-item" href="#">For you</a>
+    <a class="dropdown-item" href="/posts/ascending-posts/<%= currentUser._id %> "><i class="fas fa-sort-amount-up-alt"></i>Newest to Oldest</a>
+    <a class="dropdown-item" href="/posts/descending-posts/<%= currentUser._id %> "><i class="fas fa-sort-amount-up"></i>Oldest to Newest</a>
+    <a class="dropdown-item" href="/posts/">All feed</a>
+    <a class="dropdown-item" href="/posts/for-you/<%= currentUser._id %> ">Your feed</a>
   </div>
 </div>
 
@@ -38,6 +39,11 @@
   <div class="col-sm-12 col-md-8 col-lg-6">
     <div class="width-changer card noth">
       <div class="card-body">
+        <% if(post.author.Gender === 'Male') {%> 
+          <img class="card-img-top circle" width="300px" src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" alt="Card image cap">
+        <%} else { %> 
+          <img class="card-img-top circle" width="300px" src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?ixid=MXwxMjA3fDB8MHxzZWFyY2h8Mnx8Y2Fyc3xlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60" alt="Card image cap">
+        <% } %> 
         <h5 class="card-title"><a href="/profile/<%= post.author._id%>"><%= post.author.FirstName %>
             <%= post.author.LastName %></a></h5>
         <h6 class="card-subtitle mb-2 text-muted">@<%= post.author.username %> &#183
@@ -49,14 +55,12 @@
             method="POST">
             <button id="like-button" class="<%= hasAldreadyLiked(post, currentUser._id)? 'pink': '' %>">
               <i class="far fa-thumbs-up"></i> <%= hasAldreadyLiked(post, currentUser._id)? 'Unlike': 'Like' %>
-
             </button>
           </form>
        </div>
        <a href="/posts/<%= post._id %>/likes" class="likes-number">
         <%= post.likes.length %>
       </a>
-
       </div>
     </div>
   </div>
