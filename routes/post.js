@@ -3,7 +3,12 @@ const router = express.Router();
 const catchAsync = require('../utils/catchAsync');
 const posts = require('../controllers/post');
 const Post = require('../models/post');
-const { isLoggedin, isAuthor, hasLikedAldready, validatePost } = require('../middleware');
+const {
+    isLoggedin,
+    isAuthor,
+    hasLikedAldready,
+    validatePost,
+} = require('../middleware');
 
 router
     .route('/')

@@ -88,7 +88,7 @@ app.use((req, res, next) => {
 });
 
 app.get('/', (req, res) => {
-    res.render('home');
+    res.render('home', { page: 'home' });
 });
 
 app.use('/posts', postRoutes);

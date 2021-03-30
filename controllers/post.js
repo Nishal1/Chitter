@@ -80,11 +80,11 @@ module.exports.renderNewForm = (req, res) => {
 };
 
 module.exports.createPost = async (req, res) => {
-        const post = new Post(req.body.post);
-        post.author = req.user._id;
-        await post.save();
-        req.flash('success', 'Post successful');
-        res.redirect(`/posts`);
+    const post = new Post(req.body.post);
+    post.author = req.user._id;
+    await post.save();
+    req.flash('success', 'Post successful');
+    res.redirect(`/posts`);
 };
 
 module.exports.showPosts = async (req, res) => {
