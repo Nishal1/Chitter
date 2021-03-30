@@ -1,5 +1,8 @@
 const User = require('../models/user');
 const emailSender = require('../utils/sendEmail');
+const mbxGeocoding = require("@mapbox/mapbox-sdk/services/geocoding");
+const mapBoxToken = process.env.MAPBOX_TOKEN;
+const geocoder = mbxGeocoding({ accessToken: mapBoxToken });
 
 module.exports.renderRegister = (req, res) => {
     res.render('users/register');
@@ -7,8 +10,15 @@ module.exports.renderRegister = (req, res) => {
 
 module.exports.register = async (req, res, next) => {
     try {
-        const { username, email, password, FirstName, LastName } = req.body;
-        const user = new User({ username, email, FirstName, LastName });
+        const { username, email, password, FirstName, LastName, location, bio, gender } = req.body;
+
+        const geoData = await geocoder.forwardGeocode({
+            query: location,
+            limit: 1
+        }).send();
+        
+        const user = new User({ username, email, FirstName, LastName, location, bio, gender });
+        user.geometry = geoData.body.features[0].geometry;
         const newUser = await User.register(user, password);
         req.login(newUser, (err) => {
             if (err) return next(err);

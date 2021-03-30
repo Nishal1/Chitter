@@ -8,10 +8,10 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">      
                 <% if(currentUser) { %> 
-                    <a class="nav-link" aria-current="page" href="/posts"><i class="fas fa-home"></i> Home</a>
+                    <a class="nav-link" aria-current="page" href="/posts/for-you/<%= currentUser._id %> "><i class="fas fa-home"></i> Home</a>
                     <a class="nav-link" aria-current="page" href="/profile/<%= currentUser._id %>"><i class="fas fa-user"></i> Profile</a>
                     <a class="nav-link" href="/posts/new"><i class="fas fa-pencil-alt"></i> Make a post</a>
-                    <a class="nav-link" href="/profile/<%= currentUser._id %> /explore"><i class="fas fa-globe-americas"></i> Explore</a>
+                    <a class="nav-link" href="/profile/<%= currentUser._id %> /explore"><i class="fas fa-globe-americas"></i> People You may know</a>
                     
                     <form action="/profile/<%= currentUser._id%>/search" method="POST">
                         <div class="input-group">

@@ -34,7 +34,7 @@ nav {
  }
 
 .width-changer {
-    min-width: 500px
+    width: 100%;
 }
 
 .highlight {
@@ -170,3 +170,9 @@ nav {
     border-radius: 50%;
 }
 
+.circle {
+    border-radius: 50%;
+    width: 100px;
+    float: left;
+    margin: 10px;
+}
