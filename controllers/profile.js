@@ -136,10 +136,7 @@ module.exports.renderUsers = async (req, res) => {
     // console.log(people);
     people = [...new Set(people)];
     // console.log(people);
-
-    const users = [];
-    for (let x of people) {
-
+    
     let users = [];
     users = [...new Set(similarPlaceUsers)];
     for(let x of people){
