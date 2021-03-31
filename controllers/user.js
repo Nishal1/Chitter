@@ -5,7 +5,7 @@ const mapBoxToken = process.env.MAPBOX_TOKEN;
 const geocoder = mbxGeocoding({ accessToken: mapBoxToken });
 
 module.exports.renderRegister = (req, res) => {
-    res.render('users/register');
+    res.render('users/register', { page: 'register' });
 };
 
 module.exports.register = async (req, res, next) => {
@@ -33,7 +33,7 @@ module.exports.register = async (req, res, next) => {
 };
 
 module.exports.renderLogin = (req, res) => {
-    res.render('users/login');
+    res.render('users/login', { page: 'login' });
 };
 
 module.exports.login = (req, res) => {

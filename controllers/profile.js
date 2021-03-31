@@ -35,6 +35,7 @@ module.exports.renderProfile = async (req, res) => {
                 user,
                 displayFollow,
                 formatDate,
+                page: 'profile'
             });
         } else {
             res.status(404).send('User not found');
@@ -74,14 +75,14 @@ module.exports.renderFollowers = async (req, res) => {
     const { id } = req.params;
     const users = await User.findById(id).populate('follower');
 
-    res.render('followers', { users, isFollowing });
+    res.render('followers', { users, isFollowing, page: 'followers' });
 };
 
 module.exports.renderFollowing = async (req, res) => {
     const { id } = req.params;
     const users = await User.findById(id).populate('following');
 
-    res.render('following', { users, isFollowing });
+    res.render('following', { users, isFollowing, page: 'following' });
 };
 
 module.exports.unfollow = async (req, res) => {
@@ -163,7 +164,7 @@ module.exports.renderUsers = async (req, res) => {
     }
     for(let i = 0; i < users.length; i++){
        for(let j = 0; j < currUser.following.length; j++){
-           if(currUser.following[i].equals(users[i]._id)){
+           if(currUser.following[j].equals(users[i]._id)){
                users.splice(i, 1);
                i--;
            }
@@ -171,17 +172,17 @@ module.exports.renderUsers = async (req, res) => {
        }
     }
     console.log(users);
-    res.render('users', { users });
+    res.render('users', { users, page: 'users' });
 };
 
 module.exports.search = async (req, res) => {
     let { key }  = req.body;
     let users = await User.find({username:  {$regex: ".*" + key + ".*", $options: 'i'}});
-    if(users.length < 1){
-        users = await User.find({userName: {$regex: ".*" + key.substring(0, key.indexOf(' ')) + ".*", $options: 'i'}}); 
-            if(users.length < 1) {
-                users = await User.find({userName: {$regex: ".*" + key.substring(key.indexOf(' ')) + ".*", $options: 'i'}});
-            }
-    }
-    res.render('users', { users });
+    // if(users.length < 1){
+    //     users = await User.find({username: {$regex: ".*" + key.substring(0, key.indexOf(' ')) + ".*", $options: 'i'}}); 
+    //         if(users.length < 1) {
+    //             users = await User.find({username: {$regex: ".*" + key.substring(key.indexOf(' ')) + ".*", $options: 'i'}});
+    //         }
+    // }
+    res.render('users', { users, page: 'users' });
 }

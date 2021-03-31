@@ -6,7 +6,7 @@ let flag = 0; //0 <= flag <= 1
 module.exports.index = async (req, res) => {
     const posts = await Post.find().populate('author');
     flag = 0;
-    res.render('posts/index', { posts, formatDate, hasAldreadyLiked });
+    res.render('posts/index', { posts, formatDate, hasAldreadyLiked, page: 'index' });
 };
 
 module.exports.forYouIndex = async (req, res) => {
@@ -25,7 +25,7 @@ module.exports.forYouIndex = async (req, res) => {
     }
     // console.log(posts);
     // //console.log(pos);
-    res.render('posts/index', { posts, formatDate, hasAldreadyLiked });
+    res.render('posts/index', { posts, formatDate, hasAldreadyLiked, page: 'index' });
 }
 
 module.exports.decreasingIndex = async (req, res) => {
@@ -49,7 +49,7 @@ module.exports.decreasingIndex = async (req, res) => {
     }
 
     posts.sort((a, b) => (a.createdAt > b.createdAt) ? 1: ((b.createdAt > a.createdAt) ? -1: 0 ));
-    res.render('posts/index', { posts, formatDate, hasAldreadyLiked });
+    res.render('posts/index', { posts, formatDate, hasAldreadyLiked, page: 'index'});
 }
 
 module.exports.increasingIndex = async (req, res) => {
@@ -72,11 +72,11 @@ module.exports.increasingIndex = async (req, res) => {
         }
     }
     posts.sort((a, b) => (a.createdAt < b.createdAt) ? 1: ((b.createdAt < a.createdAt) ? -1: 0 ));
-    res.render('posts/index', { posts, formatDate, hasAldreadyLiked });
+    res.render('posts/index', { posts, formatDate, hasAldreadyLiked, page: 'index' });
 }
 
 module.exports.renderNewForm = (req, res) => {
-    res.render('posts/new');
+    res.render('posts/new', { page: 'new' });
 };
 
 module.exports.createPost = async (req, res) => {
@@ -103,7 +103,7 @@ module.exports.showPosts = async (req, res) => {
         return res.redirect('/posts');
     }
 
-    res.render('posts/show', { post, formatDate, hasAldreadyLiked });
+    res.render('posts/show', { post, formatDate, hasAldreadyLiked, page: 'show' });
 };
 
 module.exports.renderEditForm = async (req, res) => {
@@ -113,7 +113,7 @@ module.exports.renderEditForm = async (req, res) => {
         req.flash('error', 'Cannot find that post');
         return res.redirect('/posts');
     }
-    res.render('posts/edit', { post });
+    res.render('posts/edit', { post, page: 'edit' });
 };
 
 module.exports.updatePost = async (req, res) => {
@@ -171,7 +171,7 @@ module.exports.showLikes = async (req, res) => {
             return res.redirect('/posts');
         }
 
-        res.render('posts/like', { post, isFollowing });
+        res.render('posts/like', { post, isFollowing, page: 'like' });
     } catch (e) {
         res.status(500).send('Something went wrong');
     }
