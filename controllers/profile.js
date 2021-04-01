@@ -35,6 +35,7 @@ module.exports.renderProfile = async (req, res) => {
                 user,
                 displayFollow,
                 formatDate,
+                page: 'profile'
             });
         } else {
             res.status(404).send('User not found');
@@ -74,14 +75,14 @@ module.exports.renderFollowers = async (req, res) => {
     const { id } = req.params;
     const users = await User.findById(id).populate('follower');
 
-    res.render('followers', { users, isFollowing });
+    res.render('followers', { users, isFollowing, page: 'followers' });
 };
 
 module.exports.renderFollowing = async (req, res) => {
     const { id } = req.params;
     const users = await User.findById(id).populate('following');
 
-    res.render('following', { users, isFollowing });
+    res.render('following', { users, isFollowing, page: 'following' });
 };
 
 module.exports.unfollow = async (req, res) => {
@@ -120,8 +121,10 @@ module.exports.unfollow = async (req, res) => {
 };
 
 module.exports.renderUsers = async (req, res) => {
-    // const users = await User.find();
     const currUser = req.user;
+    let similarPlaceUsers = await User.find({location: req.user.location, _id: {$ne:[req.user._id]}});
+    console.log(similarPlaceUsers);
+
     let people = [];
 
     for (let i = 0; i < currUser.following.length - 1; i++) {
@@ -134,8 +137,11 @@ module.exports.renderUsers = async (req, res) => {
     // console.log(people);
     people = [...new Set(people)];
     // console.log(people);
-    const users = [];
-    for (let x of people) {
+    
+    let users = [];
+    users = [...new Set(similarPlaceUsers)];
+    for(let x of people){
+
         users.push(await User.findById(x));
     }
     // console.log(users);
@@ -156,5 +162,27 @@ module.exports.renderUsers = async (req, res) => {
         }
         return res.render('users', { users });
     }
-    res.render('users', { users });
+    for(let i = 0; i < users.length; i++){
+       for(let j = 0; j < currUser.following.length; j++){
+           if(currUser.following[j].equals(users[i]._id)){
+               users.splice(i, 1);
+               i--;
+           }
+
+       }
+    }
+    console.log(users);
+    res.render('users', { users, page: 'users' });
 };
+
+module.exports.search = async (req, res) => {
+    let { key }  = req.body;
+    let users = await User.find({username:  {$regex: ".*" + key + ".*", $options: 'i'}});
+    // if(users.length < 1){
+    //     users = await User.find({username: {$regex: ".*" + key.substring(0, key.indexOf(' ')) + ".*", $options: 'i'}}); 
+    //         if(users.length < 1) {
+    //             users = await User.find({username: {$regex: ".*" + key.substring(key.indexOf(' ')) + ".*", $options: 'i'}});
+    //         }
+    // }
+    res.render('users', { users, page: 'users' });
+}

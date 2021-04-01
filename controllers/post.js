@@ -1,14 +1,82 @@
 const Post = require('../models/post');
 const User = require('../models/user');
-const { formatDate, isFollowing, hasAldreadyLiked } = require('../helper');
+const { formatDate, isFollowing, hasAldreadyLiked, yourFeed } = require('../helper');
+let flag = 0; //0 <= flag <= 1
 
 module.exports.index = async (req, res) => {
     const posts = await Post.find().populate('author');
-    res.render('posts/index', { posts, formatDate, hasAldreadyLiked });
+    flag = 0;
+    res.render('posts/index', { posts, formatDate, hasAldreadyLiked, page: 'index' });
 };
 
+module.exports.forYouIndex = async (req, res) => {
+    flag = 1;
+    const following = req.user.following;
+    const posts = [];
+    const pos = [];
+    for(let f of following){
+        pos.push(await Post.find({ author: f._id }).populate('author'));
+    }
+
+    for(let i = 0; i < pos.length ; i ++) {
+        for(let j = 0; j < pos[i].length; j++){
+            posts.push(pos[i][j]);
+        }
+    }
+    // console.log(posts);
+    // //console.log(pos);
+    res.render('posts/index', { posts, formatDate, hasAldreadyLiked, page: 'index' });
+}
+
+module.exports.decreasingIndex = async (req, res) => {
+    let posts = [];
+    if(flag === 0) {
+        let p = await Post.find().populate('author');
+        posts = p;
+    }
+    if(flag === 1) {
+        const following = req.user.following;
+        const pos = [];
+        for(let f of following){
+            pos.push(await Post.find({ author: f._id }).populate('author'));
+        }
+
+        for(let i = 0; i < pos.length ; i ++) {
+            for(let j = 0; j < pos[i].length; j++){
+                posts.push(pos[i][j]);
+            }
+        }
+    }
+
+    posts.sort((a, b) => (a.createdAt > b.createdAt) ? 1: ((b.createdAt > a.createdAt) ? -1: 0 ));
+    res.render('posts/index', { posts, formatDate, hasAldreadyLiked, page: 'index'});
+}
+
+module.exports.increasingIndex = async (req, res) => {
+    let  posts = [];
+    if(flag === 0) {
+        let p = await Post.find().populate('author');
+        posts = p;
+    }
+    if(flag === 1) {
+        const following = req.user.following;
+        const pos = [];
+        for(let f of following){
+            pos.push(await Post.find({ author: f._id }).populate('author'));
+        }
+
+        for(let i = 0; i < pos.length ; i ++) {
+            for(let j = 0; j < pos[i].length; j++){
+                posts.push(pos[i][j]);
+            }
+        }
+    }
+    posts.sort((a, b) => (a.createdAt < b.createdAt) ? 1: ((b.createdAt < a.createdAt) ? -1: 0 ));
+    res.render('posts/index', { posts, formatDate, hasAldreadyLiked, page: 'index' });
+}
+
 module.exports.renderNewForm = (req, res) => {
-    res.render('posts/new');
+    res.render('posts/new', { page: 'new' });
 };
 
 module.exports.createPost = async (req, res) => {
@@ -35,7 +103,7 @@ module.exports.showPosts = async (req, res) => {
         return res.redirect('/posts');
     }
 
-    res.render('posts/show', { post, formatDate, hasAldreadyLiked });
+    res.render('posts/show', { post, formatDate, hasAldreadyLiked, page: 'show' });
 };
 
 module.exports.renderEditForm = async (req, res) => {
@@ -45,7 +113,7 @@ module.exports.renderEditForm = async (req, res) => {
         req.flash('error', 'Cannot find that post');
         return res.redirect('/posts');
     }
-    res.render('posts/edit', { post });
+    res.render('posts/edit', { post, page: 'edit' });
 };
 
 module.exports.updatePost = async (req, res) => {
@@ -103,7 +171,7 @@ module.exports.showLikes = async (req, res) => {
             return res.redirect('/posts');
         }
 
-        res.render('posts/like', { post, isFollowing });
+        res.render('posts/like', { post, isFollowing, page: 'like' });
     } catch (e) {
         res.status(500).send('Something went wrong');
     }

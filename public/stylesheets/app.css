@@ -57,7 +57,7 @@ html::-webkit-scrollbar-thumb{
  }
 
 .width-changer {
-    min-width: 500px
+    width: 100%;
 }
 
 .highlight {
@@ -191,4 +191,11 @@ html::-webkit-scrollbar-thumb{
     height: 50px;
     width: 50px;
     border-radius: 50%;
+}
+
+.circle {
+    border-radius: 50%;
+    width: 100px;
+    float: left;
+    margin: 10px;
 }
