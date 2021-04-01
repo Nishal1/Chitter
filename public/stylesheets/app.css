@@ -44,12 +44,12 @@ html::-webkit-scrollbar-thumb{
    border-bottom: solid white 2px;
 }
 
-.card {
+/* .card {
     border: #2B91DA solid 2px;
     background-color: #15202B;
     border-radius: 10px;
     margin-bottom: 5px;
-}
+} */
  .card-link {
     color: white;
     text-decoration: none;
