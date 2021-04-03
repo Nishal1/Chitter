@@ -20,7 +20,7 @@
 
 
 <body>
-    <main id="<%= typeof page !== 'undefined' && page === 'home' ? 'home' : '' %>">
+    <main id="<%= typeof page !== 'undefined' ? page : '' %>">
         <%- include('../partials/navbar') %>
         <%- include('../partials/flash') %>
         <%- body  %>
