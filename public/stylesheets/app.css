@@ -2,6 +2,7 @@
 @import "./auth.css";
 @import "./home.css";
 
+
 *{
     margin: 0;
     padding: 0;
@@ -61,7 +62,7 @@ html::-webkit-scrollbar-thumb{
 }
 
 .highlight {
-    background-color: #1C2732;
+    background-color: #ced7de;
 }
 
 .noth {
@@ -94,24 +95,27 @@ html::-webkit-scrollbar-thumb{
 }
 
 #followers {
-    background-color: #1C2732;
-    border: 1px white solid;
+    background-color: #fff;
+    color: #1C2732;
+    border: 1px black solid;
 }
 
-#followers:hover {
+/* #followers:hover {
     background-color: gray;
     border: 1px white solid;
-}
+} */
 
 #following {
-    background-color: #1C2732;
-    border: 1px white solid;
+    background-color: #fff;
+    color: #1C2732;
+    border: 1px black solid;
 }
 
-#following:hover {
+
+/* #following:hover {
     background-color: gray;
     border: 1px white solid;
-}
+} */
 
 #unfollow {
     background-color: #1C2732;

@@ -1,7 +1,7 @@
 module.exports.formatDate = (x, reqDate) => {
-    const year = x.getFullYear();
-    const month = x.getMonth();
-    const dt = x.getDate();
+    let year = x.getFullYear();
+    let month = x.getMonth();
+    let dt = x.getDate();
     if (dt < 10) {
         dt = '0' + dt;
     }

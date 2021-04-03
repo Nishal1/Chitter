@@ -164,7 +164,7 @@ module.exports.renderUsers = async (req, res) => {
     }
     for(let i = 0; i < users.length; i++){
        for(let j = 0; j < currUser.following.length; j++){
-           if(currUser.following[j].equals(users[i]._id)){
+           if(currUser.following[j].equals(users[i])){
                users.splice(i, 1);
                i--;
            }

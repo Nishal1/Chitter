@@ -1,6 +1,6 @@
 <% layout('layouts/boilerplate') %>
 
-<h1>Hello, <%= currentUser.FirstName %> <%= currentUser.LastName %> </h1>
+
 
 <div class="d-flex justify-content-center">
   <div class="col-sm-12 col-md-8 col-lg-6">
@@ -18,21 +18,24 @@
       </form>
 
     </div>
+
+    <div class="dropdown">
+      <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Filter <i class="fas fa-filter"></i>
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" href="/posts/ascending-posts/<%= currentUser._id %> "><i class="fas fa-sort-amount-up-alt"></i>Newest to Oldest</a>
+        <a class="dropdown-item" href="/posts/descending-posts/<%= currentUser._id %> "><i class="fas fa-sort-amount-up"></i>Oldest to Newest</a>
+        <a class="dropdown-item" href="/posts/">All feed</a>
+        <a class="dropdown-item" href="/posts/for-you/<%= currentUser._id %> ">Your feed</a>
+      </div>
+    </div>
+    
   </div>
 </div>
 </div>
 
-<div class="dropdown">
-  <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Filter <i class="fas fa-filter"></i>
-  </button>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <a class="dropdown-item" href="/posts/ascending-posts/<%= currentUser._id %> "><i class="fas fa-sort-amount-up-alt"></i>Newest to Oldest</a>
-    <a class="dropdown-item" href="/posts/descending-posts/<%= currentUser._id %> "><i class="fas fa-sort-amount-up"></i>Oldest to Newest</a>
-    <a class="dropdown-item" href="/posts/">All feed</a>
-    <a class="dropdown-item" href="/posts/for-you/<%= currentUser._id %> ">Your feed</a>
-  </div>
-</div>
+
 
 <% for(let post of posts) { %>
 <div class="d-flex justify-content-center">

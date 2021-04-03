@@ -22,6 +22,7 @@ const commentRoutes = require('./routes/comment');
 const profileRoutes = require('./routes/profile');
 const dbUrl = 'mongodb://localhost:27017/chitter';
 
+
 mongoose.connect(dbUrl, {
     useNewUrlParser: true,
     useCreateIndex: true,
@@ -95,6 +96,7 @@ app.use('/posts', postRoutes);
 app.use('/posts/:id/comments', commentRoutes);
 app.use('/profile/:id', profileRoutes); //id is author id
 app.use('/', userRoutes);
+
 
 app.all('*', (req, res, next) => {
     next(new ExpressError('PAGE NOT FOUND', 404));
