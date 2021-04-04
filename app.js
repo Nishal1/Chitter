@@ -20,7 +20,7 @@ const userRoutes = require('./routes/user');
 const postRoutes = require('./routes/post');
 const commentRoutes = require('./routes/comment');
 const profileRoutes = require('./routes/profile');
-const dbUrl = 'mongodb://localhost:27017/chitter';
+const dbUrl = process.env.DB_URL;
 
 
 mongoose.connect(dbUrl, {
@@ -46,7 +46,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(mongoSanitize());
 
-const secret = 'thishsouldbeanactualsecret';
+const secret = process.env.SECRET || 'thishsouldbeanactualsecret';
 
 const store = new MongoDBStore({
     url: dbUrl,
