@@ -56,4 +56,6 @@ const UserSchema = new Schema(
 
 UserSchema.plugin(passportLocalMongoose);
 
+UserSchema.index({ geometry: "2dsphere" });
+
 module.exports = mongoose.model('User', UserSchema);
