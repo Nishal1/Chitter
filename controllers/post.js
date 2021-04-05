@@ -1,7 +1,7 @@
 const Post = require('../models/post');
 const User = require('../models/user');
 const { formatDate, isFollowing, hasAldreadyLiked, yourFeed } = require('../helper');
-let flag = 0; //0 <= flag <= 1
+let flag = 1; //0 <= flag <= 1
 
 module.exports.index = async (req, res) => {
     //const posts = await Post.find().populate('author');
