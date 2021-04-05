@@ -20,7 +20,7 @@ const userRoutes = require('./routes/user');
 const postRoutes = require('./routes/post');
 const commentRoutes = require('./routes/comment');
 const profileRoutes = require('./routes/profile');
-const dbUrl = process.env.DB_URL;
+const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/chitter';
 
 
 mongoose.connect(dbUrl, {
