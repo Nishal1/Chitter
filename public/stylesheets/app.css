@@ -188,7 +188,7 @@ html::-webkit-scrollbar-thumb{
 
 #fixed-button {
     position: fixed;
-    bottom: 10vh;
+    bottom: 600px;
     right: 35px;
     height: 50px;
     width: 50px;
