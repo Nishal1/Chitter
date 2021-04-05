@@ -19,7 +19,15 @@
           <h6>Quick Links</h6>
           <ul class="footer-links">
             <li><a href="/" target="_blank">Home</a></li>
-            <li><a href="https://github.com/Nishal1/Chitter" target="_blank">Contribute</a></li>
+            <% if(currentUser){ %>
+              <li><a href="/posts"> Home</a></li>
+              <li>
+                  <a href="/logout"> Log Out</a>
+              </li>
+          <% } else { %>
+              <li><a href="/login" style="margin-right: 1em;">Login</a></li>
+              <li><a href="/register">Sign Up</a></li>
+          <% } %>
           </ul>
         </div>
       </div>
