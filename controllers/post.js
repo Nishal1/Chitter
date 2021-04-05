@@ -5,7 +5,7 @@ let flag = 0; //0 <= flag <= 1
 
 module.exports.index = async (req, res) => {
     //const posts = await Post.find().populate('author');
-    flag = 0;
+    flag = 1;
     const following = req.user.following;
     const posts = [];
     const pos = [];
