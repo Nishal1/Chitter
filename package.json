@@ -2,7 +2,8 @@
   "name": "chitter",
   "version": "1.0.0",
   "engines": {
-    "node": "12.18.1"
+    "node": "12.18.1",
+    "npm": "6.14.5"
   }, 
   "description": "",
   "main": "app.js",
