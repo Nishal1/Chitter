@@ -22,7 +22,6 @@ const commentRoutes = require('./routes/comment');
 const profileRoutes = require('./routes/profile');
 const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/chitter';
 
-
 mongoose.connect(dbUrl, {
     useNewUrlParser: true,
     useCreateIndex: true,
@@ -51,7 +50,7 @@ const secret = process.env.SECRET || 'thishsouldbeanactualsecret';
 const store = new MongoDBStore({
     url: dbUrl,
     secret,
-    touchAfter: 24 * 60 * 60
+    touchAfter: 24 * 60 * 60,
 });
 
 store.on('error', function (e) {
@@ -96,7 +95,6 @@ app.use('/posts', postRoutes);
 app.use('/posts/:id/comments', commentRoutes);
 app.use('/profile/:id', profileRoutes); //id is author id
 app.use('/', userRoutes);
-
 
 app.all('*', (req, res, next) => {
     next(new ExpressError('PAGE NOT FOUND', 404));

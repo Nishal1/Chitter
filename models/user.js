@@ -23,18 +23,18 @@ const UserSchema = new Schema(
             type: {
                 type: String,
                 enum: ['Point'],
-                required: true
+                required: true,
             },
             coordinates: {
                 type: [Number],
-                required: true
-            }
+                required: true,
+            },
         },
         bio: String,
         gender: {
             type: String,
             enum: ['Male', 'Female'],
-            required: true
+            required: true,
         },
         following: [
             {
@@ -56,6 +56,6 @@ const UserSchema = new Schema(
 
 UserSchema.plugin(passportLocalMongoose);
 
-UserSchema.index({ geometry: "2dsphere" });
+UserSchema.index({ geometry: '2dsphere' });
 
 module.exports = mongoose.model('User', UserSchema);

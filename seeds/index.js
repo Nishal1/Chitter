@@ -23,7 +23,7 @@ const seedDB = async () => {
         const post = new Post({
             body:
                 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo',
-           
+
             author: '60630c996563c408ec35e934',
         });
         await post.save();

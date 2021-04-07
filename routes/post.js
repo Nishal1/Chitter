@@ -31,8 +31,16 @@ router.get('/:id/likes', isLoggedin, catchAsync(posts.showLikes));
 
 router.get('/for-you/:userId', isLoggedin, catchAsync(posts.forYouIndex));
 
-router.get('/ascending-posts/:userId', isLoggedin, catchAsync(posts.increasingIndex));
+router.get(
+    '/ascending-posts/:userId',
+    isLoggedin,
+    catchAsync(posts.increasingIndex),
+);
 
-router.get('/descending-posts/:userId', isLoggedin, catchAsync(posts.decreasingIndex));
+router.get(
+    '/descending-posts/:userId',
+    isLoggedin,
+    catchAsync(posts.decreasingIndex),
+);
 
 module.exports = router;
