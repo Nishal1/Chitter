@@ -1,6 +1,7 @@
 @import "./navbar.css";
 @import "./auth.css";
 @import "./home.css";
+@import "./footer.css";
 
 
 *{
@@ -11,7 +12,6 @@
 }
 
 body {
-    color: black;
     font-family: -apple-system, system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
