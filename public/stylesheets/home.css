@@ -2,6 +2,12 @@
     height: 85vh;
 }
 
+@media(min-width: 971px){
+    #showcase{
+        height: 88vh;
+    }
+}
+
 #home{
     color: #fff;
 }
