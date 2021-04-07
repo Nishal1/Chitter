@@ -25,7 +25,9 @@
     <main id="<%= typeof page !== 'undefined' ? page : '' %>" style="margin-bottom: 300px;">
         <%- include('../partials/navbar') %>
         <%- include('../partials/flash') %>
-        <%- body  %>
+        <div id="body">
+            <%- body  %>
+        </div>
         <% if(currentUser) { %> 
             <!-- <a href="/posts/new"><button id="fixed-button"class="btn btn-success btn-block">+<i class="fas fa-pencil-alt"></i></button></a> -->
         <% } %>
