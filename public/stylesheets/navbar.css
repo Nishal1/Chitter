@@ -55,7 +55,7 @@ nav ul li a{
     margin: 10px 0;
     padding: 10px 20px;
     text-decoration: none;
-    color: black;
+    color: #fff;
     font-weight: 500;
     font-size: 18px;
     font-family: 'Rubik', sans-serif;
@@ -121,3 +121,30 @@ nav ul li a:hover{
     color: #fff;
     font-family: 'Kaushan Script', cursive;
 }
+
+/* Other Navs */
+/* #login #main-nav ul li a,
+#register #main-nav ul li a,
+#profile #main-nav ul li a,
+#followers #main-nav ul li a,
+#following #main-nav ul li a,
+#users #main-nav ul li a,
+#index #main-nav ul li a,
+#show #main-nav ul li a,
+#like #main-nav ul li a{
+    background-color: #fff;
+    color: black;
+    border-radius: 7px;
+} 
+
+#login #main-nav .logo,
+#register #main-nav .logo,
+#profile #main-nav .logo,
+#followers #main-nav .logo,
+#following #main-nav .logo,
+#users #main-nav .logo,
+#index #main-nav .logo,
+#show #main-nav .logo,
+#like #main-nav .logo{
+    color: #fa003f;
+} */
