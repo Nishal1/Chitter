@@ -1,6 +1,8 @@
 @import "./navbar.css";
 @import "./auth.css";
 @import "./home.css";
+@import "./footer.css";
+
 
 *{
     margin: 0;
@@ -43,14 +45,12 @@ html::-webkit-scrollbar-thumb{
    border-bottom: solid white 2px;
 }
 
-/* .card {
-    border: #2B91DA solid 2px;
-    background-color: #15202B;
-    border-radius: 10px;
-    margin-bottom: 5px;
-} */
+.card {
+   margin: 2px;
+   min-width: 350px;
+}
  .card-link {
-    color: white;
+    color: black;
     text-decoration: none;
     margin-right: 15px;
  }
@@ -60,15 +60,15 @@ html::-webkit-scrollbar-thumb{
 }
 
 .highlight {
-    background-color: #1C2732;
+    background-color: #ced7de;
 }
 
 .noth {
-    color: white;
+    color: black;
 }
 
 .btn-success {
-    background-color: #1D89CC;
+    background-color: #FA013F;
     border-radius: 50px;
     width: 150px;
     color: white;
@@ -93,24 +93,27 @@ html::-webkit-scrollbar-thumb{
 }
 
 #followers {
-    background-color: #1C2732;
-    border: 1px white solid;
+    background-color: #fff;
+    color: #1C2732;
+    border: 1px black solid;
 }
 
-#followers:hover {
+/* #followers:hover {
     background-color: gray;
     border: 1px white solid;
-}
+} */
 
 #following {
-    background-color: #1C2732;
-    border: 1px white solid;
+    background-color: #fff;
+    color: #1C2732;
+    border: 1px black solid;
 }
 
-#following:hover {
+
+/* #following:hover {
     background-color: gray;
     border: 1px white solid;
-}
+} */
 
 #unfollow {
     background-color: #1C2732;
@@ -159,15 +162,15 @@ html::-webkit-scrollbar-thumb{
     margin-left: 10px;
     margin-right: 2px;
     background: transparent;
-    color: white;
+    color: black;
     border: none;
 }
 
 .likes-number {
-    color: white;
+    color: black;
     font-weight: 800;
     text-decoration: none;
-    border-left: 1px solid white;
+    border-left: 1px solid black;
     padding: 3px;
     margin-right: 15px;
 }
@@ -175,7 +178,7 @@ html::-webkit-scrollbar-thumb{
 #delete-button {
     padding: 2px;
     background: transparent;
-    color: white;
+    color: black;
     border: none;
 }
 
@@ -185,7 +188,7 @@ html::-webkit-scrollbar-thumb{
 
 #fixed-button {
     position: fixed;
-    bottom: 10vh;
+    bottom: 600px;
     right: 35px;
     height: 50px;
     width: 50px;

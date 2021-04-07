@@ -1,11 +1,25 @@
 const Post = require('../models/post');
 const User = require('../models/user');
 const { formatDate, isFollowing, hasAldreadyLiked, yourFeed } = require('../helper');
-let flag = 0; //0 <= flag <= 1
+let flag = 1; //0 <= flag <= 1
 
 module.exports.index = async (req, res) => {
-    const posts = await Post.find().populate('author');
-    flag = 0;
+    //const posts = await Post.find().populate('author');
+    flag = 1;
+    const following = req.user.following;
+    const posts = [];
+    const pos = [];
+    for(let f of following){
+        pos.push(await Post.find({ author: f._id }).populate('author'));
+    }
+
+    for(let i = 0; i < pos.length ; i ++) {
+        for(let j = 0; j < pos[i].length; j++){
+            posts.push(pos[i][j]);
+        }
+    }
+    // console.log(posts);
+    // //console.log(pos);
     res.render('posts/index', { posts, formatDate, hasAldreadyLiked, page: 'index' });
 };
 

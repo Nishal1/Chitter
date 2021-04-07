@@ -2,6 +2,10 @@
     height: 85vh;
 }
 
+#home{
+    color: #fff;
+}
+
 .bg-landing {
     background-image: url(../images/image_auto_x2.jpg);
     background-position: 0 0;

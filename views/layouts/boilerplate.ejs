@@ -16,16 +16,22 @@
     <link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Roboto:ital,wght@0,400;0,500;1,500&family=Rubik:wght@400;500&display=swap" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="/stylesheets/app.css">
+   
+    
 </head>
 
 
 <body>
-    <main id="<%= typeof page !== 'undefined' && page === 'home' ? 'home' : '' %>">
+    <main id="<%= typeof page !== 'undefined' ? page : '' %>" style="margin-bottom: 300px;">
         <%- include('../partials/navbar') %>
         <%- include('../partials/flash') %>
         <%- body  %>
-    </main>
-
+        <% if(currentUser) { %> 
+            <!-- <a href="/posts/new"><button id="fixed-button"class="btn btn-success btn-block">+<i class="fas fa-pencil-alt"></i></button></a> -->
+        <% } %>
+        
+        <%- include('../partials/footer') %>
+    </main>    
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
         integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
         crossorigin="anonymous"></script>
@@ -53,6 +59,8 @@
         });
     </script>
     <script src="/javascripts/home.js"></script>
+   
 </body>
+
 
 </html>

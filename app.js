@@ -14,13 +14,14 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const mongoSanitize = require('express-mongo-sanitize');
 const ExpressError = require('./utils/ExpressError');
-//const MongoDBStore = require('connect-mongo')(session);
+const MongoDBStore = require('connect-mongo')(session);
 const User = require('./models/user');
 const userRoutes = require('./routes/user');
 const postRoutes = require('./routes/post');
 const commentRoutes = require('./routes/comment');
 const profileRoutes = require('./routes/profile');
-const dbUrl = 'mongodb://localhost:27017/chitter';
+const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/chitter';
+
 
 mongoose.connect(dbUrl, {
     useNewUrlParser: true,
@@ -45,24 +46,24 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(mongoSanitize());
 
-const secret = 'thishsouldbeanactualsecret';
+const secret = process.env.SECRET || 'thishsouldbeanactualsecret';
 
-// const store = new MongoDBStore({
-//     url: dbUrl,
-//     secret,
-//     touchAfter: 24 * 60 * 60
-// });
+const store = new MongoDBStore({
+    url: dbUrl,
+    secret,
+    touchAfter: 24 * 60 * 60
+});
 
-// store.on('error', function (e) {
-//     console.log('SESSION STORE ERROR', e);
-// })
+store.on('error', function (e) {
+    console.log('SESSION STORE ERROR', e);
+});
 
 const sessionConfig = {
-    // store,
+    store,
     name: 'session',
     secret,
     resave: false,
-    //secure: true
+    secure: true,
     saveUninitialized: true,
     cookie: {
         httpOnly: true, //this is an extra security thing
@@ -96,6 +97,7 @@ app.use('/posts/:id/comments', commentRoutes);
 app.use('/profile/:id', profileRoutes); //id is author id
 app.use('/', userRoutes);
 
+
 app.all('*', (req, res, next) => {
     next(new ExpressError('PAGE NOT FOUND', 404));
 });
@@ -107,7 +109,7 @@ app.use((err, req, res, next) => {
     res.status(statusCode).render('error', { err });
 });
 
-const port = 3000;
+const port = process.env.PORT || 3000;
 app.listen(port, () => {
     console.log(`LISTENING TO PORT ${port}`);
 });

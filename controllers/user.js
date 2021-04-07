@@ -4,6 +4,7 @@ const mbxGeocoding = require("@mapbox/mapbox-sdk/services/geocoding");
 const mapBoxToken = process.env.MAPBOX_TOKEN;
 const geocoder = mbxGeocoding({ accessToken: mapBoxToken });
 
+
 module.exports.renderRegister = (req, res) => {
     res.render('users/register', { page: 'register' });
 };
@@ -20,6 +21,7 @@ module.exports.register = async (req, res, next) => {
         const user = new User({ username, email, FirstName, LastName, location, bio, gender });
         user.geometry = geoData.body.features[0].geometry;
         const newUser = await User.register(user, password);
+    
         req.login(newUser, (err) => {
             if (err) return next(err);
             emailSender.sendMail(user);

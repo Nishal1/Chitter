@@ -123,7 +123,7 @@ module.exports.unfollow = async (req, res) => {
 module.exports.renderUsers = async (req, res) => {
     const currUser = req.user;
     let similarPlaceUsers = await User.find({location: req.user.location, _id: {$ne:[req.user._id]}});
-    console.log(similarPlaceUsers);
+    
 
     let people = [];
 
@@ -148,9 +148,9 @@ module.exports.renderUsers = async (req, res) => {
     if (users.length < 1) {
         //=>people = []
         for (let i = 0; i < currUser.follower.length; i++) {
-            // const p = await User.findById(currUser.follower[i]);
-            // const q = await User.findById(currUser.follower[i+1]);
-            // let val = majorityFollowing(p.follower, q.follower);
+            const p = await User.findById(currUser.follower[i]);
+            const q = await User.findById(currUser.follower[i+1]);
+            let val = majorityFollowing(p.follower, q.follower);
             if (!currUser.following.includes(currUser.follower[i]))
                 people.push(currUser.follower[i]);
         }
@@ -162,15 +162,21 @@ module.exports.renderUsers = async (req, res) => {
         }
         return res.render('users', { users });
     }
+    
     for(let i = 0; i < users.length; i++){
        for(let j = 0; j < currUser.following.length; j++){
-           if(currUser.following[j].equals(users[i]._id)){
+           if(currUser.following[j].equals(users[i])){
                users.splice(i, 1);
                i--;
            }
 
        }
     }
+    let jsonObject = users.map(JSON.stringify);
+  
+    let uniqueSet = new Set(jsonObject);
+    let uniqueArray = Array.from(uniqueSet).map(JSON.parse);
+    users = uniqueArray;
     console.log(users);
     res.render('users', { users, page: 'users' });
 };

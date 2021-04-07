@@ -19,10 +19,10 @@
       <div class="col-sm-12 col-md-8 col-lg-6">
         <div onclick="location.href='/profile/<%= follower._id %>'" class="width-changer card noth">
           <div class="card-body">
-            <% if(user.Gender === 'Male') {%> 
+            <% if(follower.gender === 'Male') {%> 
               <img class="card-img-top circle" width="300px" src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" alt="Card image cap">
             <%} else { %> 
-              <img class="card-img-top circle" width="300px" src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?ixid=MXwxMjA3fDB8MHxzZWFyY2h8Mnx8Y2Fyc3xlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60" alt="Card image cap">
+              <img class="card-img-top circle" width="300px" src="https://images.unsplash.com/photo-1490750967868-88aa4486c946?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" alt="Card image cap">
             <% } %> 
             <div class="likes-display">
               <h5 class="card-title"><%= follower.FirstName %> <%= follower.LastName %></h5>

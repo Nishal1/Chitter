@@ -85,18 +85,17 @@ a {
 }
 
 .btn-blue {
-    border: solid #1D89CC 2px;
-    background-color: #15202B;
+    border: solid #FA013F 2px;
+    background-color: #FA013F;
     border-radius: 50px;
     width: 150px;
-    color: #1D89CC;
+    color: black;
     border-radius: 25px;
 }
 
 .btn-blue:hover {
-    background-color: #192D3F;
-    color: #1D89CC;
-    cursor: pointer
+    color: #fff;
+    cursor: pointer;
 }
 
 .bg-blue {

@@ -1,8 +1,12 @@
 {
   "name": "chitter",
   "version": "1.0.0",
+  "engines": {
+    "node": "12.18.1",
+    "npm": "6.14.5"
+  },
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js",
@@ -38,10 +42,12 @@
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^6.0.1",
-    "sanitize-html": "^2.3.3"
+    "sanitize-html": "^2.3.3",
+    "serve": "^11.3.2"
   },
   "devDependencies": {
     "husky": "^5.2.0",
+    "nodemon": "^2.0.7",
     "prettier": "^2.2.1"
   },
   "prettier": {
