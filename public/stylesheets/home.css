@@ -300,3 +300,8 @@
     background: white;
 }
 
+@media(max-width:768px){
+    .progressbar{
+        display: none;
+    }
+}
