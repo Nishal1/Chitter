@@ -10,13 +10,7 @@
     box-sizing: border-box;
     transition: all .2s ease-out;
 }
-main{
-    min-height:100%;
-   position:relative;
-}
-#body {
-    padding-bottom:40vh;   /* Height of the footer */
- }
+
 body {
     font-family: -apple-system, system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
