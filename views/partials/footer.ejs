@@ -1,4 +1,50 @@
-  <section id="site-footer">
+<footer class="site-footer">
+  <div class="container">
+      <div class="row">
+          <div class="col-md-6" id="footer-about">
+              <h1>About</h1>
+              <p>
+                  My name is Nishal Najeeb.
+                  I am an undergrad computer science student who is constantly learning new technologies and innovating new things.
+                  Chitter is part of that innovation.
+                  This is my first full stack web application.
+                  Chitter in its roots is a social media application that helps in connecting with your loved ones.
+              </p>
+          </div>
+          <div class="col-md-3" id="footer-contact">
+              <h1>Contact The Developer:</h1>
+              <a href = "mailto: nishalwebdev@gmail.com" target="_blank">Email me!</a>
+          </div>
+          <div class="col-md-3" id="footer-links">
+              <h1>Quick Links</h1>
+              <a href="/">Home</a>
+              <% if(currentUser){ %>
+                  <a href="/posts">Feed</a>
+                  <a href="/logout">Log Out</a>
+              <% } else { %>
+                  <a href="/login" style="margin-right: 1em;">Login</a>
+                  <a href="/register">Sign Up</a>
+              <% } %>
+          </div>
+      </div>
+      <hr id="footer-hr">
+      <div class="row justify-content-start" style="margin-top: 1.5em;">
+          <div class="col-md-6 float-left">
+              <p>
+                  Copyright &copy; 2021-2022. All rights reserved by <span class="foot-logo">Chitter</span>
+              </p>
+          </div>
+          <div class="col-md-4 float-right" id="footer-media">
+              <a class="facebook" href="https://www.facebook.com/Nishal.001" target="_blank"><i class="fab fa-facebook"></i></a>
+              <a class="instagram" href="https://www.instagram.com/nishalnajeeb/" target="_blank"><i class="fab fa-instagram"></i></a>
+              <a class="github" href="https://github.com/Nishal1" target="_blank"><i class="fab fa-github"></i></a>
+              <a class="linkedin" href="https://www.linkedin.com/in/nishal-najeeb-077a681a5/" target="_blank"><i class="fab fa-linkedin"></i></a>  
+          </div>
+      </div>
+  </div>
+</footer>
+  
+  <!-- <footer id="site-footer">
     <div class="container">
       <div class="row">
         <div class="col-sm-12 col-md-6">
@@ -50,4 +96,4 @@
         </div>
       </div>
     </div>
-  </section>
+  </footer> -->
