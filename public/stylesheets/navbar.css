@@ -131,7 +131,6 @@ nav ul li a:hover{
 #show #main-nav ul li a,
 #like #main-nav ul li a,
 #explore #main-nav ul li a{
-    background-color: #fff;
     color: black;
     border-radius: 7px;
 } 
