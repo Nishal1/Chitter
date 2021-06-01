@@ -17,7 +17,7 @@ module.exports.isLoggedin = (req, res, next) => {
 module.exports.isNotLoggedin = (req, res, next) => {
     //console.log(req.user);
     if (req.isAuthenticated()) {
-        req.flash('success', 'Aldready logged in');
+        req.flash('success', 'Already logged in');
         return res.redirect('/posts');
     }
     next();

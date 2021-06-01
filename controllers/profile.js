@@ -25,7 +25,7 @@ module.exports.renderProfile = async (req, res) => {
             },
         ]);
 
-        const date = formatDate(req.user.createdAt, false);
+        const date = formatDate(user.createdAt, false);
         const displayFollow = isFollowing(req.user, authorId);
 
         if (result.length > 0) {
