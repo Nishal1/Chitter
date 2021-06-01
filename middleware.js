@@ -14,6 +14,15 @@ module.exports.isLoggedin = (req, res, next) => {
     next();
 };
 
+module.exports.isNotLoggedin = (req, res, next) => {
+    //console.log(req.user);
+    if (req.isAuthenticated()) {
+        req.flash('success', 'Aldready logged in');
+        return res.redirect('/posts');
+    }
+    next();
+};
+
 module.exports.isAuthor = async (req, res, next) => {
     const { id } = req.params;
     const post = await Post.findById(id);

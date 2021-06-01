@@ -126,71 +126,79 @@ module.exports.renderUsers = async (req, res) => {
         location: req.user.location,
         _id: { $ne: [req.user._id] },
     });
-
-    let people = [];
-
-    for (let i = 0; i < currUser.following.length - 1; i++) {
-        const p = await User.findById(currUser.following[i]);
-        const q = await User.findById(currUser.following[i + 1]);
-        let val = majorityFollowing(p.following, q.following);
-        if (!val.equals(currUser._id) && !currUser.following.includes(val))
-            people.push(val);
-    }
-    // console.log(people);
-    people = [...new Set(people)];
-    // console.log(people);
-
     let users = [];
-    users = [...new Set(similarPlaceUsers)];
-    for (let x of people) {
-        users.push(await User.findById(x));
+    users = similarPlaceUsers;
+    let peeps = [];
+    for(let i = 0 ; i < currUser.follower; i++) {
+        if(!currUser.following[i].includes(currUser.follower[i], 0)) {
+            peeps.push(currUser.follower[i]);
+        }
     }
+    users = [...new Set(peeps)];
+    // let people = [];
+
+    // for (let i = 0; i < currUser.following.length - 1; i++) {
+    //     const p = await User.findById(currUser.following[i]);
+    //     const q = await User.findById(currUser.following[i + 1]);
+    //     let val = majorityFollowing(p.following, q.following);
+    //     if (!val.equals(currUser._id) && !currUser.following.includes(val))
+    //         people.push(val);
+    // }
+    // // console.log(people);
+    // people = [...new Set(people)];
+    // // console.log(people);
+
+    
+    // users = [...new Set(similarPlaceUsers)];
+    // for (let x of people) {
+    //     users.push(await User.findById(x));
+    // }
+    // // console.log(users);
+    // if (users.length < 1) {
+    //     //=>people = []
+    //     for (let i = 0; i < currUser.follower.length; i++) {
+    //         const p = await User.findById(currUser.follower[i]);
+    //         const q = await User.findById(currUser.follower[i + 1]);
+    //         let val = majorityFollowing(p.follower, q.follower);
+    //         if (!currUser.following.includes(currUser.follower[i]))
+    //             people.push(currUser.follower[i]);
+    //     }
+
+    //     people = [...new Set(people)];
+
+    //     for (let x of people) {
+    //         users.push(await User.findById(x));
+    //     }
+    //     return res.render('users', { users });
+    // }
+
+    // for (let i = 0; i < users.length; i++) {
+    //     for (let j = 0; j < currUser.following.length; j++) {
+    //         if (currUser.following[j].equals(users[i])) {
+    //             users.splice(i, 1);
+    //             i--;
+    //         }
+    //     }
+    // }
+    // let jsonObject = users.map(JSON.stringify);
+
+    // let uniqueSet = new Set(jsonObject);
+    // let uniqueArray = Array.from(uniqueSet).map(JSON.parse);
+    // users = uniqueArray;
     // console.log(users);
-    if (users.length < 1) {
-        //=>people = []
-        for (let i = 0; i < currUser.follower.length; i++) {
-            const p = await User.findById(currUser.follower[i]);
-            const q = await User.findById(currUser.follower[i + 1]);
-            let val = majorityFollowing(p.follower, q.follower);
-            if (!currUser.following.includes(currUser.follower[i]))
-                people.push(currUser.follower[i]);
-        }
-
-        people = [...new Set(people)];
-
-        for (let x of people) {
-            users.push(await User.findById(x));
-        }
-        return res.render('users', { users });
-    }
-
-    for (let i = 0; i < users.length; i++) {
-        for (let j = 0; j < currUser.following.length; j++) {
-            if (currUser.following[j].equals(users[i])) {
-                users.splice(i, 1);
-                i--;
-            }
-        }
-    }
-    let jsonObject = users.map(JSON.stringify);
-
-    let uniqueSet = new Set(jsonObject);
-    let uniqueArray = Array.from(uniqueSet).map(JSON.parse);
-    users = uniqueArray;
-    console.log(users);
     res.render('users', { users, page: 'users' });
 };
 
 module.exports.search = async (req, res) => {
     let { key } = req.body;
-    let users = await User.find({
-        username: { $regex: '.*' + key + '.*', $options: 'i' },
+    let usersList = await User.find({
+       // username: { $regex: '.*' + key + '.*', $options: 'i' },
     });
-    // if(users.length < 1){
-    //     users = await User.find({username: {$regex: ".*" + key.substring(0, key.indexOf(' ')) + ".*", $options: 'i'}});
-    //         if(users.length < 1) {
-    //             users = await User.find({username: {$regex: ".*" + key.substring(key.indexOf(' ')) + ".*", $options: 'i'}});
-    //         }
-    // }
+    let users = [];
+    key = key.toLowerCase();
+    for (let j=0; j < usersList.length; j++) {
+        let p = usersList[j].username.toLowerCase();
+        if (p.match(key)) users.push(usersList[j]);
+    }
     res.render('users', { users, page: 'users' });
 };
