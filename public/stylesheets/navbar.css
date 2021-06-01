@@ -1,5 +1,3 @@
-@import url("font-awesome/css/fontawesome-all.min.css");
-
 #main-nav {
     position: relative;
     max-width: 1200px;
@@ -133,7 +131,6 @@ nav ul li a:hover{
 #show #main-nav ul li a,
 #like #main-nav ul li a,
 #explore #main-nav ul li a{
-    background-color: #fff;
     color: black;
     border-radius: 7px;
 } 
